@@ -71,7 +71,7 @@ class EditViewController: UIViewController {
             filter.setValue(data, forKey: "inputMessage")
             
             if let outputCIImage = filter.outputImage {
-                print(UIImage(ciImage: outputCIImage).size)
+                //print(UIImage(ciImage: outputCIImage).size)
                 return UIImage(ciImage: outputCIImage)
             }
         }
@@ -83,15 +83,15 @@ class EditViewController: UIViewController {
     }
     
     @IBAction func doneBtn(_ sender: Any) {
-        if (shopTF.text != "" && titleTF.text != "") {
+        if (shopTF.text != "" && titleTF.text != "" && shopTF.text == "Other") {
             card?.title = titleTF.text!
-            card?.logo = shopTF.text!
+            card?.logo = nil
             delegate?.editCard(card: card!, index: cellIndex)
             performSegue(withIdentifier: "doneEditSegue", sender: nil)
         }
         else if (shopTF.text != "" && titleTF.text != "") {
             card?.title = titleTF.text!
-            card?.logo = nil
+            card?.logo = shopTF.text!
             delegate?.editCard(card: card!, index: cellIndex)
             performSegue(withIdentifier: "doneEditSegue", sender: nil)
         }

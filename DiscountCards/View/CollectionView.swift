@@ -59,10 +59,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier2, for: indexPath) as! cardCollectionCellLabel
-        print(indexPath.row)
         if (isFiltering() && filteredCards[indexPath.row].logo != nil) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier1, for: indexPath) as! cardCollectionCellImage
-            print(indexPath.row)
             cell.index = indexPath.row
             cell.cellView.backgroundColor = .white//filteredCards[indexPath.row].backgroundColor
             cell.logoView.image = UIImage(named: cards[indexPath.row].logo!)
@@ -72,7 +70,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
         else if (isFiltering() && filteredCards[indexPath.row].logo == nil) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier2, for: indexPath) as! cardCollectionCellLabel
-            print(indexPath.row)
             cell.index = indexPath.row
             cell.cellView.backgroundColor = .white//filteredCards[indexPath.row].backgroundColor
             cell.barcodeView.image = fromString(string: filteredCards[indexPath.row].barcode)
@@ -82,7 +79,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
         else if (!isFiltering() && cards[indexPath.row].logo != nil) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier1, for: indexPath) as! cardCollectionCellImage
-            print(indexPath.row)
             cell.index = indexPath.row
             cell.cellView.backgroundColor = .white//cards[indexPath.row].backgroundColor
             cell.logoView.image = UIImage(named: cards[indexPath.row].logo!)//loadImage(fileName: cards[indexPath.row].logo!)
@@ -92,10 +88,10 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
         else if (!isFiltering() && cards[indexPath.row].logo == nil) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier2, for: indexPath) as! cardCollectionCellLabel
-            print(indexPath.row)
             cell.index = indexPath.row
             cell.cellView.backgroundColor = .white//cards[indexPath.row].backgroundColor
             cell.barcodeView.image = fromString(string: cards[indexPath.row].barcode)
+            print(cards[indexPath.row].title)
             cell.labelView.text = cards[indexPath.row].title
             collectionView.scaledVisibleCells()
             return cell
@@ -110,8 +106,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let Width = self.view.frame.width * 0.76
         let Height = self.view.frame.height * 0.65
-        //        let Width = self.view.frame.width * 0.85
-        //        let Height = self.view.frame.height * 0.3
         return CGSize(width: Width, height: Height)
     }
     
@@ -126,7 +120,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             filter.setValue(data, forKey: "inputMessage")
             
             if let outputCIImage = filter.outputImage {
-                print(UIImage(ciImage: outputCIImage).size)
+                //print(UIImage(ciImage: outputCIImage).size)
                 return UIImage(ciImage: outputCIImage)
             }
         }

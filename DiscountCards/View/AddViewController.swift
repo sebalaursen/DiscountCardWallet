@@ -63,7 +63,7 @@ class AddViewController: UIViewController {
             filter.setValue(data, forKey: "inputMessage")
             
             if let outputCIImage = filter.outputImage {
-                print(UIImage(ciImage: outputCIImage).size)
+                //print(UIImage(ciImage: outputCIImage).size)
                 return UIImage(ciImage: outputCIImage)
             }
         }

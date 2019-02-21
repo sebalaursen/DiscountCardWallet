@@ -111,12 +111,14 @@ extension ViewController: cardDelegate {
     }
     
     func removeCard(index: Int) {
+        coreData.delete(at: index)
         cards.remove(at: index)
         collectionView.deleteItems(at: [[0, index]])
         collectionView.scaledVisibleCells()
     }
     
     func editCard(card: cardInfo, index: Int) {
+        coreData.edit(logo: card.logo, title: card.title, barcode: card.barcode, at: index)
         cards[index].logo = card.logo
         cards[index].title = card.title
         collectionView.scaledVisibleCells()
