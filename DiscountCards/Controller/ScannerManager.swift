@@ -26,8 +26,7 @@ class ScannerManager {
         ScannerViewController.errorDelegate = self
         ScannerViewController.dismissalDelegate = self
         
-//        ScannerViewController.headerViewController.closeButton.setTitle("Закрити", for: UIControl.State())//titleLabel?.text = "Закрити"
-//        ScannerViewController.headerViewController.titleLabel.text = ""//"Скануйте Штрих-код"
+        ScannerViewController.headerViewController.closeButton.tintColor = UIColor(red: 235/255, green: 70/255, blue: 145/255, alpha: 1)
         ScannerViewController.messageViewController.messages.processingText = "Loading..."
         ScannerViewController.messageViewController.messages.scanningText = "Place the barcode within the window to scan."//"Розмістіть штрих-код у вікні для сканування."
         
