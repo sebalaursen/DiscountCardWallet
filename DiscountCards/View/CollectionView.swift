@@ -64,7 +64,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier1, for: indexPath) as! cardCollectionCellImage
             print(indexPath.row)
             cell.index = indexPath.row
-            cell.cellView.backgroundColor = filteredCards[indexPath.row].backgroundColor
+            cell.cellView.backgroundColor = .white//filteredCards[indexPath.row].backgroundColor
             cell.logoView.image = UIImage(named: cards[indexPath.row].logo!)
             cell.barcodeView.image = fromString(string: filteredCards[indexPath.row].barcode)
             collectionView.scaledVisibleCells()
@@ -74,7 +74,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier2, for: indexPath) as! cardCollectionCellLabel
             print(indexPath.row)
             cell.index = indexPath.row
-            cell.cellView.backgroundColor = filteredCards[indexPath.row].backgroundColor
+            cell.cellView.backgroundColor = .white//filteredCards[indexPath.row].backgroundColor
             cell.barcodeView.image = fromString(string: filteredCards[indexPath.row].barcode)
             cell.labelView.text = filteredCards[indexPath.row].title
             collectionView.scaledVisibleCells()
@@ -94,7 +94,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier2, for: indexPath) as! cardCollectionCellLabel
             print(indexPath.row)
             cell.index = indexPath.row
-            cell.cellView.backgroundColor = cards[indexPath.row].backgroundColor
+            cell.cellView.backgroundColor = .white//cards[indexPath.row].backgroundColor
             cell.barcodeView.image = fromString(string: cards[indexPath.row].barcode)
             cell.labelView.text = cards[indexPath.row].title
             collectionView.scaledVisibleCells()
