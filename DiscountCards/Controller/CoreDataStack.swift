@@ -45,7 +45,7 @@ final class CoreDataStack {
             
             if (results.count > 0) {
                 for result in results as! [NSManagedObject] {
-                    let barcode = result.value(forKey: "title") as? String
+                    let barcode = result.value(forKey: "barcode") as? String
                     let title = result.value(forKey: "title") as? String
                     let logo = result.value(forKey: "logo") as? String
                     cards.append(cardInfo(backgroundColor: .white, logo: logo, barcode: barcode!, title: title!))
@@ -73,24 +73,6 @@ final class CoreDataStack {
         catch {
             let nserror = error as NSError
             print("Context save error \(nserror), \(nserror.userInfo)")
-        }
-    }
-    
-    func delete () {
-        let context = coreData.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
-        
-        request.returnsObjectsAsFaults = false
-        do {
-            let results =  try context.fetch(request)
-            if (results.count > 0 && selectedItemIndex != nil) {
-                let result = results[selectedItemIndex!] as! NSManagedObject
-                context.delete(result)
-            }
-            try context.save()
-        } catch {
-            let nserror = error as NSError
-            print("Error while deleting data \(nserror), \(nserror.userInfo)")
         }
     }
     

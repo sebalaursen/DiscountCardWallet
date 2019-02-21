@@ -63,7 +63,7 @@ class AddViewController: UIViewController {
             filter.setValue(data, forKey: "inputMessage")
             
             if let outputCIImage = filter.outputImage {
-                print(UIImage(ciImage: outputCIImage).size)
+                //print(UIImage(ciImage: outputCIImage).size)
                 return UIImage(ciImage: outputCIImage)
             }
         }
@@ -76,12 +76,12 @@ class AddViewController: UIViewController {
     
     @IBAction func doneBtn(_ sender: Any) {
         if (shopTF.text != "" && titleTF.text != "" && shopTF.text != "Other") {
-            delegate?.sendCardInfo(card: cardInfo(backgroundColor: getRandomColor(), logo: shopTF.text, barcode: self.code!, title: titleTF.text!))
-            performSegue(withIdentifier: "doneSegue", sender: nil)
+            delegate?.addCard(card: cardInfo(backgroundColor: getRandomColor(), logo: shopTF.text, barcode: self.code!, title: titleTF.text!))
+            performSegue(withIdentifier: "doneAddingSegue", sender: nil)
         }
         else if (shopTF.text != "" && titleTF.text != "") {
-            delegate?.sendCardInfo(card: cardInfo(backgroundColor: getRandomColor(), logo: nil, barcode: self.code!, title: titleTF.text!))
-            performSegue(withIdentifier: "doneSegue", sender: nil)
+            delegate?.addCard(card: cardInfo(backgroundColor: getRandomColor(), logo: nil, barcode: self.code!, title: titleTF.text!))
+            performSegue(withIdentifier: "doneAddingSegue", sender: nil)
         }
         else {
             let alert = UIAlertController(title: title, message: "Please enter all fields", preferredStyle: .alert)
@@ -93,6 +93,7 @@ class AddViewController: UIViewController {
     }
     
     @IBAction func cancelBtn(_ sender: Any) {
+        performSegue(withIdentifier: "doneAddingSegue", sender: nil)
     }
 }
 
@@ -113,7 +114,10 @@ extension AddViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickedShop = shops[row]
         shopTF.text = pickedShop
-        titleTF.text = pickedShop
+        
+        if (pickedShop != "Other") {
+            titleTF.text = pickedShop
+        }
     }
 }
 
