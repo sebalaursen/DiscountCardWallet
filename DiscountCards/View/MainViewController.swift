@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
     let cellIdentifier1 = "CollectionCellImage"
     let cellIdentifier2 = "CollectionCellLabel"
-    var documentsUrl: URL = FileManager.default.urls(for: .applicationDirectory, in: .allDomainsMask).first!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,14 +67,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func editBtn(_ sender: Any) {
-        let cells = collectionView.visibleCells 
+        let cells = collectionView.visibleCells
         guard let selectedCell = getSelectedCell(cells: cells) else {
             return
         }
         let indexpath = collectionView.indexPath(for: selectedCell)
-        cards.remove(at: indexpath!.row)
-        collectionView.deleteItems(at: [[0, indexpath!.row]])
-        collectionView.scaledVisibleCells()
+        
+        let editController = storyboard!.instantiateViewController(withIdentifier: "editVC") as! EditViewController
+        editController.delegate = self
+        editController.cellIndex = indexpath!.row
+        editController.card = cards[indexpath!.row]
+        self.present(editController, animated: true, completion: nil)
     }
     
     @IBAction func searchBtn(_ sender: Any) {
@@ -100,24 +102,31 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: cardDelegate {
-    func sendCardInfo(card: cardInfo) {
+    func addCard(card: cardInfo) {
         cards.append(card)
         coreData.add(logo: card.logo, title: card.title, barcode: card.barcode)
         collectionView.insertItems(at: [[0, cards.count - 1]])
         collectionView.scrollToItem(at: [0, cards.count - 1], at: .centeredHorizontally, animated: true)
         collectionView.scaledVisibleCells()
-        
-        
     }
     
+    func removeCard(index: Int) {
+        coreData.delete(at: index)
+        cards.remove(at: index)
+        collectionView.deleteItems(at: [[0, index]])
+        collectionView.scaledVisibleCells()
+    }
+    
+    func editCard(card: cardInfo, index: Int) {
+        coreData.edit(logo: card.logo, title: card.title, barcode: card.barcode, at: index)
+        cards[index].logo = card.logo
+        cards[index].title = card.title
+        collectionView.scaledVisibleCells()
+    }
 }
 
 extension ViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
-    
-    
 }
-
-

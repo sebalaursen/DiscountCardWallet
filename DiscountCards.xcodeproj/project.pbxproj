@@ -22,7 +22,7 @@
 		9ED5A1CF221C615D002A7B5C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1CA221C615D002A7B5C /* TabBarViewController.swift */; };
 		9ED5A1D3221C6171002A7B5C /* MVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1D0221C6170002A7B5C /* MVController.swift */; };
 		9ED5A1D4221C6171002A7B5C /* ScannerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1D1221C6170002A7B5C /* ScannerManager.swift */; };
-		9ED5A1D5221C6171002A7B5C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1D2221C6171002A7B5C /* CoreDataManager.swift */; };
+		9ED5A1D5221C6171002A7B5C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1D2221C6171002A7B5C /* CoreDataStack.swift */; };
 		BF3DE0642E2EAF8F763CADC7 /* Pods_DiscountCards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5C359555FE7EA5DB94A7C9 /* Pods_DiscountCards.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +45,7 @@
 		9ED5A1CA221C615D002A7B5C /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		9ED5A1D0221C6170002A7B5C /* MVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVController.swift; sourceTree = "<group>"; };
 		9ED5A1D1221C6170002A7B5C /* ScannerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerManager.swift; sourceTree = "<group>"; };
-		9ED5A1D2221C6171002A7B5C /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		9ED5A1D2221C6171002A7B5C /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		BE6882DEC6C111C9C08B90EC /* Pods-DiscountCards.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscountCards.release.xcconfig"; path = "Target Support Files/Pods-DiscountCards/Pods-DiscountCards.release.xcconfig"; sourceTree = "<group>"; };
 		FB5C359555FE7EA5DB94A7C9 /* Pods_DiscountCards.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DiscountCards.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,7 +99,7 @@
 		9ED5A1BF221C5FF1002A7B5C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9ED5A1D2221C6171002A7B5C /* CoreDataManager.swift */,
+				9ED5A1D2221C6171002A7B5C /* CoreDataStack.swift */,
 				9ED5A1D0221C6170002A7B5C /* MVController.swift */,
 				9ED5A1D1221C6170002A7B5C /* ScannerManager.swift */,
 			);
@@ -274,7 +274,7 @@
 				9ED5A1D4221C6171002A7B5C /* ScannerManager.swift in Sources */,
 				9ED5A1CC221C615D002A7B5C /* SettingsViewController.swift in Sources */,
 				9ED5A1CB221C615D002A7B5C /* EditViewController.swift in Sources */,
-				9ED5A1D5221C6171002A7B5C /* CoreDataManager.swift in Sources */,
+				9ED5A1D5221C6171002A7B5C /* CoreDataStack.swift in Sources */,
 				9ED5A1B3221C5FE4002A7B5C /* DiscountCards.xcdatamodeld in Sources */,
 				9ED5A1D3221C6171002A7B5C /* MVController.swift in Sources */,
 				9ED5A1AB221C5FE4002A7B5C /* AppDelegate.swift in Sources */,

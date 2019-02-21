@@ -11,7 +11,9 @@ import BarcodeScanner
 import AVFoundation
 
 protocol cardDelegate: class {
-    func sendCardInfo(card: cardInfo)
+    func addCard(card: cardInfo)
+    func removeCard(index: Int)
+    func editCard(card: cardInfo, index: Int)
 }
 
 class ScannerManager {
