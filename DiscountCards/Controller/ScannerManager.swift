@@ -11,6 +11,7 @@ import BarcodeScanner
 import AVFoundation
 
 protocol cardDelegate: class {
+    //var cards: [cardInfo] {get set}
     func addCard(card: cardInfo)
     func removeCard(index: Int)
     func editCard(card: cardInfo, index: Int)
@@ -30,7 +31,7 @@ class ScannerManager {
         
         ScannerViewController.headerViewController.closeButton.tintColor = UIColor(red: 235/255, green: 70/255, blue: 145/255, alpha: 1)
         ScannerViewController.messageViewController.messages.processingText = "Loading..."
-        ScannerViewController.messageViewController.messages.scanningText = "Place the barcode within the window to scan."//"Розмістіть штрих-код у вікні для сканування."
+        ScannerViewController.messageViewController.messages.scanningText = "Place the barcode within the window to scan."
         
         viewController.present(ScannerViewController, animated: true, completion: nil)
     }
@@ -67,8 +68,6 @@ extension ScannerManager: BarcodeScannerCodeDelegate, BarcodeScannerErrorDelegat
             addController.code = code
             addController.delegate = self.delegate
             controller.present(addController, animated: true, completion: nil)
-            //delegate?.sendCardInfo(card: cardInfo(backgroundColor: getRandomColor(), logo: nil, barcode: code, title: "Abc"))
-            //controller.dismiss(animated: true, completion: nil)
         }
         else {
             let alert = UIAlertController(
