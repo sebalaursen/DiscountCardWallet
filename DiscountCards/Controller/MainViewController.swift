@@ -14,16 +14,26 @@ class ViewController: UIViewController {
     var collectionView: UICollectionView!
     var prevState: UIBarButtonItem!
     var filteredCards: [card] = []
-    let wallet = Wallet()
     let searchController = UISearchController(searchResultsController: nil)
     let cellIdentifier1 = "CollectionCellImage"
     let cellIdentifier2 = "CollectionCellLabel"
-    let coreData = CoreDataStack()/////////////////
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         setupSearchController()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupNotifications()
+        collectionView.scaledVisibleCells()
+    }
+    
+    func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onAddingCard), name: .addedCard, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onRemovingCard(notif:)), name: .removedCard, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onEditingCard), name: .editedCard, object: nil)
     }
     
     func setupSearchController() {
@@ -39,7 +49,7 @@ class ViewController: UIViewController {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredCards = wallet.cards.filter({( card : card) -> Bool in
+        filteredCards = Wallet.shared.cards.filter({( card : card) -> Bool in
             return card.title.lowercased().contains(searchText.lowercased())
         })
         
@@ -79,7 +89,7 @@ class ViewController: UIViewController {
         let editController = storyboard!.instantiateViewController(withIdentifier: "editVC") as! EditViewController
         editController.delegate = self
         editController.cellIndex = indexpath!.row
-        editController.card = wallet.cards[indexpath!.row]
+        editController.card = Wallet.shared.cards[indexpath!.row]
         self.present(editController, animated: true, completion: nil)
     }
     
@@ -102,29 +112,38 @@ class ViewController: UIViewController {
         view.endEditing(true)
         collectionView.scaledVisibleCells()
     }
+    
+    @objc func onAddingCard() {
+        collectionView.insertItems(at: [[0, Wallet.shared.cards.count - 1]])
+        collectionView.scrollToItem(at: [0, Wallet.shared.cards.count - 1], at: .centeredHorizontally, animated: true)
+        collectionView.scaledVisibleCells()
+    }
+    
+    @objc func onRemovingCard(notif: Notification) {
+        if let userInfo = notif.userInfo as? [Int : Int] {
+            if let index = userInfo[0] {
+                collectionView.deleteItems(at: [[0, index]])
+                collectionView.scaledVisibleCells()
+            }
+        }
+    }
+    
+    @objc func onEditingCard() {
+        collectionView.scaledVisibleCells()
+    }
 }
 
 extension ViewController: cardDelegate {
     func addCard(card: card) {
-        wallet.cards.append(card)
-        coreData.add(logo: card.logo, title: card.title, barcode: card.barcode)
-        collectionView.insertItems(at: [[0, wallet.cards.count - 1]])
-        collectionView.scrollToItem(at: [0, wallet.cards.count - 1], at: .centeredHorizontally, animated: true)
-        collectionView.scaledVisibleCells()
+        Wallet.shared.add(card)
     }
     
     func removeCard(index: Int) {
-        coreData.delete(at: index)
-        wallet.cards.remove(at: index)
-        collectionView.deleteItems(at: [[0, index]])
-        collectionView.scaledVisibleCells()
+        Wallet.shared.remove(at: index)
     }
     
     func editCard(card: card, index: Int) {
-        coreData.edit(logo: card.logo, title: card.title, barcode: card.barcode, at: index)
-        wallet.cards[index].logo = card.logo
-        wallet.cards[index].title = card.title
-        collectionView.scaledVisibleCells()
+        Wallet.shared.edit(at: index, to: card)
     }
 }
 

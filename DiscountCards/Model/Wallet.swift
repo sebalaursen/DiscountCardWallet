@@ -6,20 +6,36 @@
 //  Copyright © 2019 Sebastian Laursen. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Wallet {
+    static let shared = Wallet()
+    
     var cards = [card]()
+    let coreData = CoreDataStack()
     
-    func add(card: card) {
-        cards.append(card)
+    private init() {}
+    
+    func add(_ card: card) {
+        if cards.contains(card) {
+            
+        } else {
+            cards.append(card)
+            coreData.add(logo: card.logo, title: card.title, barcode: card.barcode)
+            NotificationCenter.default.post(name: .addedCard, object: nil)
+        }
     }
     
-    func delete(at index: Int) {
+    func remove(at index: Int) {
         cards.remove(at: index)
+        coreData.delete(at: index)
+        NotificationCenter.default.post(name: .removedCard, object: nil, userInfo: [0:index])
     }
     
-    func edit(at index: Int) {
-        //
+    func edit(at index: Int, to card: card) {
+        cards[index].logo = card.logo
+        cards[index].title = card.title
+        coreData.edit(logo: card.logo, title: card.title, barcode: card.barcode, at: index)
+        NotificationCenter.default.post(name: .editedCard, object: nil)
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9E2CA7962266951800AA2093 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA7952266951800AA2093 /* Wallet.swift */; };
+		9E2CA7992266B37000AA2093 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA7982266B37000AA2093 /* Extensions.swift */; };
 		9ED5A1AB221C5FE4002A7B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1AA221C5FE4002A7B5C /* AppDelegate.swift */; };
 		9ED5A1AD221C5FE4002A7B5C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1AC221C5FE4002A7B5C /* MainViewController.swift */; };
 		9ED5A1B0221C5FE4002A7B5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9ED5A1AE221C5FE4002A7B5C /* Main.storyboard */; };
@@ -21,7 +22,6 @@
 		9ED5A1CD221C615D002A7B5C /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1C8221C615D002A7B5C /* AddViewController.swift */; };
 		9ED5A1CE221C615D002A7B5C /* CardCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1C9221C615D002A7B5C /* CardCollectionCell.swift */; };
 		9ED5A1CF221C615D002A7B5C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1CA221C615D002A7B5C /* TabBarViewController.swift */; };
-		9ED5A1D3221C6171002A7B5C /* MVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1D0221C6170002A7B5C /* MVController.swift */; };
 		9ED5A1D4221C6171002A7B5C /* ScannerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1D1221C6170002A7B5C /* ScannerManager.swift */; };
 		9ED5A1D5221C6171002A7B5C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1D2221C6171002A7B5C /* CoreDataStack.swift */; };
 		BF3DE0642E2EAF8F763CADC7 /* Pods_DiscountCards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5C359555FE7EA5DB94A7C9 /* Pods_DiscountCards.framework */; };
@@ -30,6 +30,7 @@
 /* Begin PBXFileReference section */
 		470765B8FF62F3425187F84D /* Pods-DiscountCards.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscountCards.debug.xcconfig"; path = "Target Support Files/Pods-DiscountCards/Pods-DiscountCards.debug.xcconfig"; sourceTree = "<group>"; };
 		9E2CA7952266951800AA2093 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
+		9E2CA7982266B37000AA2093 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9ED5A1A7221C5FE4002A7B5C /* DiscountCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscountCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ED5A1AA221C5FE4002A7B5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ED5A1AC221C5FE4002A7B5C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -45,7 +46,6 @@
 		9ED5A1C8221C615D002A7B5C /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		9ED5A1C9221C615D002A7B5C /* CardCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCollectionCell.swift; sourceTree = "<group>"; };
 		9ED5A1CA221C615D002A7B5C /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		9ED5A1D0221C6170002A7B5C /* MVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVController.swift; sourceTree = "<group>"; };
 		9ED5A1D1221C6170002A7B5C /* ScannerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerManager.swift; sourceTree = "<group>"; };
 		9ED5A1D2221C6171002A7B5C /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		BE6882DEC6C111C9C08B90EC /* Pods-DiscountCards.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscountCards.release.xcconfig"; path = "Target Support Files/Pods-DiscountCards/Pods-DiscountCards.release.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +73,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		9E2CA7972266B35300AA2093 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9E2CA7982266B37000AA2093 /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		9ED5A19E221C5FE4002A7B5C = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +102,7 @@
 		9ED5A1A9221C5FE4002A7B5C /* DiscountCards */ = {
 			isa = PBXGroup;
 			children = (
+				9E2CA7972266B35300AA2093 /* Extensions */,
 				9E2CA79422664FF400AA2093 /* Managers */,
 				9ED5A1C1221C6002002A7B5C /* Model */,
 				9ED5A1BF221C5FF1002A7B5C /* View */,
@@ -112,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				9ED5A1C9221C615D002A7B5C /* CardCollectionCell.swift */,
-				9ED5A1D0221C6170002A7B5C /* MVController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -289,7 +297,7 @@
 				9ED5A1CB221C615D002A7B5C /* EditViewController.swift in Sources */,
 				9ED5A1D5221C6171002A7B5C /* CoreDataStack.swift in Sources */,
 				9ED5A1B3221C5FE4002A7B5C /* DiscountCards.xcdatamodeld in Sources */,
-				9ED5A1D3221C6171002A7B5C /* MVController.swift in Sources */,
+				9E2CA7992266B37000AA2093 /* Extensions.swift in Sources */,
 				9ED5A1AB221C5FE4002A7B5C /* AppDelegate.swift in Sources */,
 				9ED5A1CF221C615D002A7B5C /* TabBarViewController.swift in Sources */,
 				9ED5A1C3221C6016002A7B5C /* Card.swift in Sources */,

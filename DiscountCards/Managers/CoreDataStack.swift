@@ -35,7 +35,7 @@ final class CoreDataStack {
         }
     }
     
-    func load(wallet: Wallet) {
+    func load(_ wallet: Wallet) {
         let context = self.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
         

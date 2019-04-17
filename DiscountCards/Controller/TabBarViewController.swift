@@ -34,10 +34,10 @@ class TabBarViewController:  UITabBarController, UITabBarControllerDelegate {
     }
     
     func anime() {
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: 0.05, animations: {
             self.addBtn.layer.opacity = 0.5
         }) {(isFinished) in
-            UIView.animate(withDuration: 0.1, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.addBtn.layer.opacity = 1
             })
         }

@@ -20,4 +20,5 @@ extension AVMetadataObject.ObjectType {
     AVMetadataObject.ObjectType.qr,
     AVMetadataObject.ObjectType.upce
   ]
+    
 }
