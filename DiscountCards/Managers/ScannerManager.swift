@@ -11,10 +11,9 @@ import BarcodeScanner
 import AVFoundation
 
 protocol cardDelegate: class {
-    //var cards: [cardInfo] {get set}
-    func addCard(card: cardInfo)
+    func addCard(card: card)
     func removeCard(index: Int)
-    func editCard(card: cardInfo, index: Int)
+    func editCard(card: card, index: Int)
 }
 
 class ScannerManager {
@@ -62,14 +61,15 @@ class ScannerManager {
 
 extension ScannerManager: BarcodeScannerCodeDelegate, BarcodeScannerErrorDelegate, BarcodeScannerDismissalDelegate {
     func scanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
-        if (!cards.contains(where: { $0.barcode == code})) {
+        //if (!cards.contains(where: { $0.barcode == code})) { //add  this event handle in main vc
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let addController = storyboard.instantiateViewController(withIdentifier: "addVC") as! AddViewController
+            
             addController.code = code
             addController.delegate = self.delegate
             controller.present(addController, animated: true, completion: nil)
-        }
-        else {
+        //}
+        //else {
             let alert = UIAlertController(
                 title: "Already exists",
                 message: "This card already exists in your wallet.",
@@ -80,7 +80,7 @@ extension ScannerManager: BarcodeScannerCodeDelegate, BarcodeScannerErrorDelegat
                 controller.reset(animated: true)
             }))
             controller.present(alert, animated: true, completion: nil)
-        }
+        //}
     }
     
     func scanner(_ controller: BarcodeScannerViewController, didReceiveError error: Error) {

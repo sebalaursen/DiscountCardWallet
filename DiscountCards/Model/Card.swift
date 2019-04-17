@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct cardInfo: Equatable, Hashable {
+struct card: Equatable, Hashable {
     var backgroundColor: UIColor
     var logo: String?
     var barcode: String
@@ -20,12 +20,7 @@ struct cardInfo: Equatable, Hashable {
         self.barcode = barcode
         self.title = title
     }
-    
-    var hashValue: Int {
-        return Int(barcode)!
-    }
-    
-    static func == (lhs: cardInfo, rhs: cardInfo) -> Bool {
+    static func == (lhs: card, rhs: card) -> Bool {
         return lhs.barcode == rhs.barcode
     }
     

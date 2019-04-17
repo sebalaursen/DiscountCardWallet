@@ -45,7 +45,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     
     func collectionViewAdd() {
-        collectionView.insertItems(at: [[0, cards.count - 1]])
+        collectionView.insertItems(at: [[0, wallet.cards.count - 1]])
         collectionView.scaledVisibleCells()
     }
     
@@ -54,7 +54,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         if (isFiltering()) {
             return filteredCards.count
         }
-        return cards.count
+        return wallet.cards.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -63,7 +63,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier1, for: indexPath) as! cardCollectionCellImage
             cell.index = indexPath.row
             cell.cellView.backgroundColor = .white//filteredCards[indexPath.row].backgroundColor
-            cell.logoView.image = UIImage(named: cards[indexPath.row].logo!)
+            cell.logoView.image = UIImage(named: wallet.cards[indexPath.row].logo!)
             cell.barcodeView.image = fromString(string: filteredCards[indexPath.row].barcode)
             collectionView.scaledVisibleCells()
             return cell
@@ -77,29 +77,29 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             collectionView.scaledVisibleCells()
             return cell
         }
-        else if (!isFiltering() && cards[indexPath.row].logo != nil) {
+        else if (!isFiltering() && wallet.cards[indexPath.row].logo != nil) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier1, for: indexPath) as! cardCollectionCellImage
             cell.index = indexPath.row
             cell.cellView.backgroundColor = .white//cards[indexPath.row].backgroundColor
-            cell.logoView.image = UIImage(named: cards[indexPath.row].logo!)//loadImage(fileName: cards[indexPath.row].logo!)
-            cell.barcodeView.image = fromString(string: cards[indexPath.row].barcode)
+            cell.logoView.image = UIImage(named: wallet.cards[indexPath.row].logo!)//loadImage(fileName: cards[indexPath.row].logo!)
+            cell.barcodeView.image = fromString(string: wallet.cards[indexPath.row].barcode)
             collectionView.scaledVisibleCells()
             return cell
         }
-        else if (!isFiltering() && cards[indexPath.row].logo == nil) {
+        else if (!isFiltering() && wallet.cards[indexPath.row].logo == nil) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier2, for: indexPath) as! cardCollectionCellLabel
             cell.index = indexPath.row
             cell.cellView.backgroundColor = .white//cards[indexPath.row].backgroundColor
-            cell.barcodeView.image = fromString(string: cards[indexPath.row].barcode)
-            print(cards[indexPath.row].title)
-            cell.labelView.text = cards[indexPath.row].title
+            cell.barcodeView.image = fromString(string: wallet.cards[indexPath.row].barcode)
+            print(wallet.cards[indexPath.row].title)
+            cell.labelView.text = wallet.cards[indexPath.row].title
             collectionView.scaledVisibleCells()
             return cell
         }
         cell.index = indexPath.row
-        cell.cellView.backgroundColor = cards[indexPath.row].backgroundColor
-        cell.barcodeView.image = fromString(string: cards[indexPath.row].barcode)
-        cell.labelView.text = cards[indexPath.row].title
+        cell.cellView.backgroundColor = wallet.cards[indexPath.row].backgroundColor
+        cell.barcodeView.image = fromString(string: wallet.cards[indexPath.row].barcode)
+        cell.labelView.text = wallet.cards[indexPath.row].title
         return cell
     }
     

@@ -11,7 +11,7 @@ import AVFoundation
 
 class TabBarViewController:  UITabBarController, UITabBarControllerDelegate {
     
-    let addBtn = UIButton(type: .custom)//(frame: .zero)
+    let addBtn = UIButton(type: .custom)
     let scannerManager = ScannerManager()
     
     override func viewDidLoad(){
@@ -55,6 +55,8 @@ class TabBarViewController:  UITabBarController, UITabBarControllerDelegate {
             let vc: UIViewController = navController.viewControllers[0]
             scannerManager.showScanner(viewController: vc as! ViewController)
         case .restricted, .denied: scannerManager.alertCameraAccessNeeded(viewController: self)
+        @unknown default:
+            print("error")
         }
     }
     

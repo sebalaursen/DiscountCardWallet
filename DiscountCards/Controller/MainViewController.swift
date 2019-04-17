@@ -13,9 +13,12 @@ class ViewController: UIViewController {
     
     var collectionView: UICollectionView!
     var prevState: UIBarButtonItem!
+    var filteredCards: [card] = []
+    let wallet = Wallet()
     let searchController = UISearchController(searchResultsController: nil)
     let cellIdentifier1 = "CollectionCellImage"
     let cellIdentifier2 = "CollectionCellLabel"
+    let coreData = CoreDataStack()/////////////////
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +39,7 @@ class ViewController: UIViewController {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredCards = cards.filter({( card : cardInfo) -> Bool in
+        filteredCards = wallet.cards.filter({( card : card) -> Bool in
             return card.title.lowercased().contains(searchText.lowercased())
         })
         
@@ -76,7 +79,7 @@ class ViewController: UIViewController {
         let editController = storyboard!.instantiateViewController(withIdentifier: "editVC") as! EditViewController
         editController.delegate = self
         editController.cellIndex = indexpath!.row
-        editController.card = cards[indexpath!.row]
+        editController.card = wallet.cards[indexpath!.row]
         self.present(editController, animated: true, completion: nil)
     }
     
@@ -102,25 +105,25 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: cardDelegate {
-    func addCard(card: cardInfo) {
-        cards.append(card)
+    func addCard(card: card) {
+        wallet.cards.append(card)
         coreData.add(logo: card.logo, title: card.title, barcode: card.barcode)
-        collectionView.insertItems(at: [[0, cards.count - 1]])
-        collectionView.scrollToItem(at: [0, cards.count - 1], at: .centeredHorizontally, animated: true)
+        collectionView.insertItems(at: [[0, wallet.cards.count - 1]])
+        collectionView.scrollToItem(at: [0, wallet.cards.count - 1], at: .centeredHorizontally, animated: true)
         collectionView.scaledVisibleCells()
     }
     
     func removeCard(index: Int) {
         coreData.delete(at: index)
-        cards.remove(at: index)
+        wallet.cards.remove(at: index)
         collectionView.deleteItems(at: [[0, index]])
         collectionView.scaledVisibleCells()
     }
     
-    func editCard(card: cardInfo, index: Int) {
+    func editCard(card: card, index: Int) {
         coreData.edit(logo: card.logo, title: card.title, barcode: card.barcode, at: index)
-        cards[index].logo = card.logo
-        cards[index].title = card.title
+        wallet.cards[index].logo = card.logo
+        wallet.cards[index].title = card.title
         collectionView.scaledVisibleCells()
     }
 }

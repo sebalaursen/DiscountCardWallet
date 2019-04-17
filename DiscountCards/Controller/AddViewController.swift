@@ -1,5 +1,5 @@
 //
-//  EditViewController.swift
+//  AddViewController.swift
 //  DiscountCardWallet
 //
 //  Created by Sebastian on /19/2/19.
@@ -8,38 +8,23 @@
 
 import UIKit
 
-class EditViewController: UIViewController {
+class AddViewController: UIViewController {
     
-    var cellIndex: Int!
-    var pickedShop: String?
-    var card: cardInfo?
+    var code: String?
     weak var delegate: cardDelegate?
     let shops = [ "", "CCC", "Watsons", "Рукавичка", "Other"]
+    var pickedShop: String?
     
     @IBOutlet weak var shopTF: UITextField!
     @IBOutlet weak var titleTF: UITextField!
     @IBOutlet weak var barcodeImg: UIImageView!
-    @IBOutlet weak var deleteBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-        self.hideKeyboardWhenTappedAround()
-    }
-    
-    func setup() {
         setupShopPicker()
         setUpToolbar()
-        
-        titleTF.text = card?.title
-        barcodeImg.image = fromString(string: card!.barcode)
-        
-        if (card?.logo != nil) {
-            shopTF.text = card?.logo
-        }
-        else {
-            shopTF.text = "Other"
-        }
+        barcodeImg.image = fromString(string: code!)
+        self.hideKeyboardWhenTappedAround()
     }
     
     func setupShopPicker() {
@@ -64,6 +49,13 @@ class EditViewController: UIViewController {
         shopTF.inputAccessoryView = toolBar
     }
     
+    func getRandomColor() -> UIColor{
+        let randomRed:CGFloat = CGFloat(drand48())
+        let randomGreen:CGFloat = CGFloat(drand48())
+        let randomBlue:CGFloat = CGFloat(drand48())
+        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue + 10, alpha: 1.0)
+    }
+    
     func fromString(string : String) -> UIImage? {
         let data = string.data(using: .ascii)
         
@@ -83,17 +75,13 @@ class EditViewController: UIViewController {
     }
     
     @IBAction func doneBtn(_ sender: Any) {
-        if (shopTF.text != "" && titleTF.text != "" && shopTF.text == "Other") {
-            card?.title = titleTF.text!
-            card?.logo = nil
-            delegate?.editCard(card: card!, index: cellIndex)
-            performSegue(withIdentifier: "doneEditSegue", sender: nil)
+        if (shopTF.text != "" && titleTF.text != "" && shopTF.text != "Other") {
+            delegate?.addCard(card: card(backgroundColor: getRandomColor(), logo: shopTF.text, barcode: self.code!, title: titleTF.text!))
+            performSegue(withIdentifier: "doneAddingSegue", sender: nil)
         }
         else if (shopTF.text != "" && titleTF.text != "") {
-            card?.title = titleTF.text!
-            card?.logo = shopTF.text!
-            delegate?.editCard(card: card!, index: cellIndex)
-            performSegue(withIdentifier: "doneEditSegue", sender: nil)
+            delegate?.addCard(card: card(backgroundColor: getRandomColor(), logo: nil, barcode: self.code!, title: titleTF.text!))
+            performSegue(withIdentifier: "doneAddingSegue", sender: nil)
         }
         else {
             let alert = UIAlertController(title: title, message: "Please enter all fields", preferredStyle: .alert)
@@ -105,16 +93,11 @@ class EditViewController: UIViewController {
     }
     
     @IBAction func cancelBtn(_ sender: Any) {
-        performSegue(withIdentifier: "doneEditSegue", sender: nil)
-    }
-    
-    @IBAction func deleteBtn(_ sender: Any) {
-        delegate?.removeCard(index: cellIndex)
-        performSegue(withIdentifier: "doneEditSegue", sender: nil)
+        performSegue(withIdentifier: "doneAddingSegue", sender: nil)
     }
 }
 
-extension EditViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
+extension AddViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -135,5 +118,17 @@ extension EditViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
         if (pickedShop != "Other") {
             titleTF.text = pickedShop
         }
+    }
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

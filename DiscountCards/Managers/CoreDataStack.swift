@@ -35,8 +35,8 @@ final class CoreDataStack {
         }
     }
     
-    func load () {
-        let context = coreData.persistentContainer.viewContext
+    func load(wallet: Wallet) {
+        let context = self.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
         
         request.returnsObjectsAsFaults = false
@@ -48,7 +48,7 @@ final class CoreDataStack {
                     let barcode = result.value(forKey: "barcode") as? String
                     let title = result.value(forKey: "title") as? String
                     let logo = result.value(forKey: "logo") as? String
-                    cards.append(cardInfo(backgroundColor: .white, logo: logo, barcode: barcode!, title: title!))
+                    wallet.cards.append(card(backgroundColor: .white, logo: logo, barcode: barcode!, title: title!))
                 }
             }
         } catch {
@@ -58,7 +58,7 @@ final class CoreDataStack {
     }
     
     func add (logo: String?, title: String, barcode: String) {
-        let context = coreData.persistentContainer.viewContext
+        let context = self.persistentContainer.viewContext
         let newNote = NSEntityDescription.insertNewObject(forEntityName: "Card", into: context)
         
         newNote.setValue(title, forKey: "title")
@@ -72,12 +72,12 @@ final class CoreDataStack {
         }
         catch {
             let nserror = error as NSError
-            print("Context save error \(nserror), \(nserror.userInfo)")
+            print("Error while adding data \(nserror), \(nserror.userInfo)")
         }
     }
     
     func delete (at: Int) {
-        let context = coreData.persistentContainer.viewContext
+        let context = self.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
         
         request.returnsObjectsAsFaults = false
@@ -95,7 +95,7 @@ final class CoreDataStack {
     }
     
     func edit (logo: String?, title: String, barcode: String, at index: Int?) {
-        let context = coreData.persistentContainer.viewContext
+        let context = self.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
         
         request.returnsObjectsAsFaults = false
@@ -116,7 +116,7 @@ final class CoreDataStack {
             
         } catch {
             let nserror = error as NSError
-            print("Error while deleting data \(nserror), \(nserror.userInfo)")
+            print("Error while editing data \(nserror), \(nserror.userInfo)")
         }
     }
 }
