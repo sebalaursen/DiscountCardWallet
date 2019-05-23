@@ -12,7 +12,6 @@ import ScaledVisibleCellsCollectionView
 class ViewController: UIViewController {
     
     var collectionView: UICollectionView!
-    var prevState: UIBarButtonItem!
     var filteredCards: [card] = []
     let searchController = UISearchController(searchResultsController: nil)
     let cellIdentifier1 = "CollectionCellImage"
@@ -22,7 +21,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         setupSearchController()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +39,7 @@ class ViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Cards"
         searchController.searchBar.tintColor = UIColor(red: 235/255, green: 70/255, blue: 145/255, alpha: 1)
+        searchController.searchBar.delegate = self
         definesPresentationContext = true
     }
     
@@ -94,22 +93,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func searchBtn(_ sender: Any) {
-        if (navigationItem.titleView != nil) {
-            navigationItem.titleView = nil
-        }
-        else {
-            prevState = navigationItem.leftBarButtonItem
-            navigationItem.searchController = searchController
-            navigationItem.searchController?.isActive = true
-            navigationItem.leftBarButtonItem? = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(endSearchBtn))
-            collectionView.scaledVisibleCells()
-        }
-    }
-    
-    @objc func endSearchBtn() {
-        navigationItem.searchController = nil
-        navigationItem.leftBarButtonItem? = prevState
-        view.endEditing(true)
+        navigationItem.searchController = searchController
+        navigationItem.searchController?.isActive = true
         collectionView.scaledVisibleCells()
     }
     
@@ -147,8 +132,14 @@ extension ViewController: cardDelegate {
     }
 }
 
-extension ViewController: UISearchResultsUpdating {
+extension ViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        navigationItem.searchController = nil
+        view.endEditing(true)
+        collectionView.scaledVisibleCells()
     }
 }
