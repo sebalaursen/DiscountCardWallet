@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  FavoirtesViewController.swift
 //  DiscountCards
 //
-//  Created by Sebastian on /19/2/19.
+//  Created by Sebastian on /23/5/19.
 //  Copyright © 2019 Sebastian Laursen. All rights reserved.
 //
 
@@ -10,10 +10,11 @@ import UIKit
 import ScaledVisibleCellsCollectionView
 import AVFoundation
 
-class ViewController: UIViewController {
-    
+class FavoirtesViewController: UIViewController {
+
     var collectionView: UICollectionView!
     var filteredCards: [card] = []
+    var cards: [card] = []
     let searchController = UISearchController(searchResultsController: nil)
     let cellIdentifier1 = "CollectionCellImage"
     let cellIdentifier2 = "CollectionCellLabel"
@@ -28,6 +29,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         setupNotifications()
         collectionView.scaledVisibleCells()
+        cards = Wallet.shared.getFavs()
     }
     
     func setupNotifications() {
@@ -50,7 +52,7 @@ class ViewController: UIViewController {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredCards = Wallet.shared.cards.filter({( card : card) -> Bool in
+        filteredCards = cards.filter({( card : card) -> Bool in
             return card.title.lowercased().contains(searchText.lowercased())
         })
         
@@ -85,6 +87,7 @@ class ViewController: UIViewController {
             guard let index = collectionView.indexPath(for: cel) else {return}
             cel.starButton.tintColor = .yellow
             Wallet.shared.cards[index.row].isFav = true
+            cards[index.row].isFav = true
             
             let ed = Wallet.shared.cards[index.row]
             CoreDataStack().edit(logo: ed.logo, title: ed.title, barcode: ed.barcode, at: index.row, fav: true)
@@ -92,6 +95,7 @@ class ViewController: UIViewController {
             guard let index = collectionView.indexPath(for: cel) else {return}
             cel.starButton.tintColor = .yellow
             Wallet.shared.cards[index.row].isFav = true
+            cards[index.row].isFav = true
             
             let ed = Wallet.shared.cards[index.row]
             CoreDataStack().edit(logo: nil, title: ed.title, barcode: ed.barcode, at: index.row, fav: true)
@@ -103,19 +107,20 @@ class ViewController: UIViewController {
             guard let index = collectionView.indexPath(for: cel) else {return}
             cel.starButton.tintColor = .darkGray
             Wallet.shared.cards[index.row].isFav = false
+            cards[index.row].isFav = false
             
-            let ed = Wallet.shared.cards[index.row]
+            let ed = cards[index.row]
             CoreDataStack().edit(logo: ed.logo, title: ed.title, barcode: ed.barcode, at: index.row, fav: false)
         } else if let cel = cell1 {
             guard let index = collectionView.indexPath(for: cel) else {return}
             cel.starButton.tintColor = .darkGray
             Wallet.shared.cards[index.row].isFav = false
+            cards[index.row].isFav = false
             
-            let ed = Wallet.shared.cards[index.row]
+            let ed = cards[index.row]
             CoreDataStack().edit(logo: nil, title: ed.title, barcode: ed.barcode, at: index.row, fav: false)
         }
     }
-    
     @IBAction func editBtn(_ sender: Any) {
         let cells = collectionView.visibleCells
         guard let selectedCell = getSelectedCell(cells: cells) else {
@@ -126,16 +131,17 @@ class ViewController: UIViewController {
         let editController = storyboard!.instantiateViewController(withIdentifier: "editVC") as! EditViewController
         editController.delegate = self
         editController.cellIndex = indexpath!.row
-        editController.card = Wallet.shared.cards[indexpath!.row]
+        editController.card = cards[indexpath!.row]
         self.present(editController, animated: true, completion: nil)
     }
+    
     @IBAction func addBtn(_ sender: Any) {
         let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
         
         switch cameraAuthorizationStatus {
         case .notDetermined: scannerManager.requestCameraPermission()
         case .authorized:
-            scannerManager.showScanner(viewController: self)
+            scannerManager.showScannerr(viewController: self)
         case .restricted, .denied: scannerManager.alertCameraAccessNeeded(viewController: self)
         @unknown default:
             print("error")
@@ -149,9 +155,11 @@ class ViewController: UIViewController {
     }
     
     @objc func onAddingCard() {
-        collectionView.insertItems(at: [[0, Wallet.shared.cards.count - 1]])
-        collectionView.scrollToItem(at: [0, Wallet.shared.cards.count - 1], at: .centeredHorizontally, animated: true)
-        collectionView.scaledVisibleCells()
+        if cards.count != 0 { //temporary, because observer, need to add new observer for this view
+            collectionView.insertItems(at: [[0, cards.count - 1]])
+            collectionView.scrollToItem(at: [0, cards.count - 1], at: .centeredHorizontally, animated: true)
+            collectionView.scaledVisibleCells()
+        }
     }
     
     @objc func onRemovingCard(notif: Notification) {
@@ -168,21 +176,24 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: cardDelegate {
+extension FavoirtesViewController: cardDelegate {
     func addCard(card: card) {
         Wallet.shared.add(card)
+        cards.append(card)
     }
     
     func removeCard(index: Int) {
         Wallet.shared.remove(at: index)
+        cards.remove(at: index)
     }
     
     func editCard(card: card, index: Int) {
         Wallet.shared.edit(at: index, to: card)
+        cards[index] = card
     }
 }
 
-extension ViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension FavoirtesViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }

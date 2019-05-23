@@ -76,6 +76,25 @@ final class CoreDataStack {
         }
     }
     
+    func deleteAllData(_ entity:String) {
+        let context = self.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        
+        request.returnsObjectsAsFaults = false
+        do {
+            let results =  try context.fetch(request)
+            if (results.count > 0) {
+                for result in results as! [NSManagedObject] {
+                    context.delete(result)
+                }
+            }
+            try context.save()
+        } catch {
+            let nserror = error as NSError
+            print("Error while deleting data \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
     func delete (at: Int) {
         let context = self.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
@@ -107,6 +126,33 @@ final class CoreDataStack {
                 
                 result.setValue(title, forKey: "title")
                 result.setValue(barcode, forKey: "barcode")
+                if logo != nil {
+                    result.setValue(logo, forKey: "logo")
+                }
+            }
+            
+            try context.save()
+            
+        } catch {
+            let nserror = error as NSError
+            print("Error while editing data \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    func edit (logo: String?, title: String, barcode: String, at index: Int?, fav: Bool) {
+        let context = self.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
+        
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results =  try context.fetch(request)
+            if (results.count > 0 && index != nil) {
+                let result = results[index!] as! NSManagedObject
+                
+                result.setValue(title, forKey: "title")
+                result.setValue(barcode, forKey: "barcode")
+                result.setValue(fav, forKey: "isFavorite")
                 if logo != nil {
                     result.setValue(logo, forKey: "logo")
                 }

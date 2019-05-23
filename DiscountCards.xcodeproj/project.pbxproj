@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E21E2DC22973B4B00EBAC05 /* FavoirtesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E21E2DB22973B4B00EBAC05 /* FavoirtesViewController.swift */; };
 		9E2CA7962266951800AA2093 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA7952266951800AA2093 /* Wallet.swift */; };
 		9E2CA7992266B37000AA2093 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA7982266B37000AA2093 /* Extensions.swift */; };
 		9ED5A1AB221C5FE4002A7B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1AA221C5FE4002A7B5C /* AppDelegate.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		470765B8FF62F3425187F84D /* Pods-DiscountCards.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscountCards.debug.xcconfig"; path = "Target Support Files/Pods-DiscountCards/Pods-DiscountCards.debug.xcconfig"; sourceTree = "<group>"; };
+		9E21E2DB22973B4B00EBAC05 /* FavoirtesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoirtesViewController.swift; sourceTree = "<group>"; };
 		9E2CA7952266951800AA2093 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		9E2CA7982266B37000AA2093 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9ED5A1A7221C5FE4002A7B5C /* DiscountCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscountCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +136,7 @@
 				9ED5A1C8221C615D002A7B5C /* AddViewController.swift */,
 				9ED5A1C6221C615D002A7B5C /* EditViewController.swift */,
 				9ED5A1C7221C615D002A7B5C /* SettingsViewController.swift */,
+				9E21E2DB22973B4B00EBAC05 /* FavoirtesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				9ED5A1CB221C615D002A7B5C /* EditViewController.swift in Sources */,
 				9ED5A1D5221C6171002A7B5C /* CoreDataStack.swift in Sources */,
 				9ED5A1B3221C5FE4002A7B5C /* DiscountCards.xcdatamodeld in Sources */,
+				9E21E2DC22973B4B00EBAC05 /* FavoirtesViewController.swift in Sources */,
 				9E2CA7992266B37000AA2093 /* Extensions.swift in Sources */,
 				9ED5A1AB221C5FE4002A7B5C /* AppDelegate.swift in Sources */,
 				9ED5A1CF221C615D002A7B5C /* TabBarViewController.swift in Sources */,

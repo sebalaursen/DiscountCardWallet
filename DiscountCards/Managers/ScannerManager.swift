@@ -35,6 +35,21 @@ class ScannerManager {
         viewController.present(ScannerViewController, animated: true, completion: nil)
     }
     
+    func showScannerr(viewController: FavoirtesViewController) {
+        self.delegate = viewController
+        
+        let ScannerViewController = BarcodeScannerViewController()
+        ScannerViewController.codeDelegate = self
+        ScannerViewController.errorDelegate = self
+        ScannerViewController.dismissalDelegate = self
+        
+        ScannerViewController.headerViewController.closeButton.tintColor = UIColor(red: 235/255, green: 70/255, blue: 145/255, alpha: 1)
+        ScannerViewController.messageViewController.messages.processingText = "Loading..."
+        ScannerViewController.messageViewController.messages.scanningText = "Place the barcode within the window to scan."
+        
+        viewController.present(ScannerViewController, animated: true, completion: nil)
+    }
+    
     func requestCameraPermission() {
         AVCaptureDevice.requestAccess(for: .video, completionHandler: {accessGranted in
             guard accessGranted == true else { return }

@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "wallet-7.png",
+      "filename" : "star-7.png",
       "scale" : "1x"
     },
     {
@@ -20,6 +20,7 @@
   },
   "properties" : {
     "compression-type" : "lossless",
+    "template-rendering-intent" : "template",
     "preserves-vector-representation" : true
   }
 }

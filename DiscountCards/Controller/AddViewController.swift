@@ -29,11 +29,11 @@ class AddViewController: UIViewController {
     
     func setupShopPicker() {
         
-        let genderPicker = UIPickerView()
-        genderPicker.delegate = self
-        genderPicker.backgroundColor = .lightGray
+        let shopPicker = UIPickerView()
+        shopPicker.delegate = self
+        shopPicker.backgroundColor = .lightGray
         
-        shopTF.inputView = genderPicker
+        shopTF.inputView = shopPicker
     }
     
     func setUpToolbar() {

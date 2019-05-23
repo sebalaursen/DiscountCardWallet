@@ -11,7 +11,7 @@ import UIKit
 class Wallet {
     static let shared = Wallet()
     
-    var cards = [card]()
+    var cards: [card] = []
     let coreData = CoreDataStack()
     
     private init() {}
@@ -37,5 +37,15 @@ class Wallet {
         cards[index].title = card.title
         coreData.edit(logo: card.logo, title: card.title, barcode: card.barcode, at: index)
         NotificationCenter.default.post(name: .editedCard, object: nil)
+    }
+    
+    func getFavs() -> [card] {
+        var res: [card] = []
+        for c in cards {
+            if c.isFav {
+                res.append(c)
+            }
+        }
+        return res
     }
 }

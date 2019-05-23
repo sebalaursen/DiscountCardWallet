@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (enableAllOrientation == true){
             return UIInterfaceOrientationMask.allButUpsideDown
         }
+        //CoreDataStack().deleteAllData("Card")
         return UIInterfaceOrientationMask.portrait
     }
     

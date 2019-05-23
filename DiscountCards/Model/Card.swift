@@ -13,6 +13,7 @@ struct card: Equatable, Hashable {
     var logo: String?
     var barcode: String
     var title: String
+    var isFav = false
     
     init(backgroundColor: UIColor, logo: String?, barcode: String, title: String) {
         self.backgroundColor = backgroundColor
