@@ -12,6 +12,7 @@ import AVFoundation
 
 class FavoirtesViewController: UIViewController {
 
+    private let mapStarView = MapStarViewController()
     var collectionView: UICollectionView!
     var filteredCards: [card] = []
     var cards: [card] = []
@@ -24,11 +25,14 @@ class FavoirtesViewController: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         setupSearchController()
+        hideKeyboardWhenTappedAround()
+        panGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setupNotifications()
         collectionView.scaledVisibleCells()
+        setup()
         cards = Wallet.shared.getFavs()
     }
     
@@ -38,13 +42,54 @@ class FavoirtesViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(onEditingCard), name: .editedCard, object: nil)
     }
     
-    func setupSearchController() {
+    private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Cards"
-        searchController.searchBar.tintColor = UIColor(red: 235/255, green: 70/255, blue: 145/255, alpha: 1)
+        searchController.searchBar.tintColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1)
         searchController.searchBar.delegate = self
         definesPresentationContext = true
+    }
+    
+    private func setup() {
+        mapStarView.view.frame = CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: self.view.bounds.maxY * 0.35)
+        mapStarView.view.backgroundColor = .red
+        mapStarView.parVC = self
+        
+        self.addChild(mapStarView)
+        self.view.addSubview(mapStarView.view)
+    }
+    
+    private func panGesture() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(sender:)))
+        self.view.addGestureRecognizer(pan)
+    }
+    
+    @objc private func handleGesture(sender: UIPanGestureRecognizer) {
+        
+        if Wallet.shared.hasFavs() {
+            if sender.velocity(in: self.view).y < 0 {
+                UIView.animate(withDuration: 0.3) {
+                    if self.view.frame.origin.y == 0 {
+                        self.view.frame.origin.y -= self.mapStarView.view.frame.height
+                    }
+                }
+            } else {
+                UIView.animate(withDuration: 0.3) {
+                    if self.view.frame.origin.y == -self.mapStarView.view.frame.height {
+                        self.view.frame.origin.y += self.mapStarView.view.frame.height
+                    }
+                }
+            }
+        }
+        
+        collectionView.scaledVisibleCells() //need?
+    }
+    
+    func hideMapStar() {
+        if self.view.frame.origin.y == -self.mapStarView.view.frame.height {
+            self.view.frame.origin.y += self.mapStarView.view.frame.height
+        }
     }
     
     func searchBarIsEmpty() -> Bool {

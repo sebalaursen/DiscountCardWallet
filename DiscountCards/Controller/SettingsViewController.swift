@@ -9,9 +9,40 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    
+    @IBOutlet weak var radiusTF: UITextField!
+    @IBOutlet weak var radiusSlider: UISlider!
+    var currentRadius: Float!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
+        setup()
     }
+    
+    func setup() {
+        radiusSlider.maximumValue = 10000.0
+        radiusSlider.value = Settings.radius
+        radiusTF.text = String(format: "%.0f", radiusSlider.value)
+    }
+    
+    @IBAction func radiusSliderChanged(_ sender: Any) {
+        radiusTF.text = String(format: "%.0f", radiusSlider.value)
+        UserDefaults.standard.set(radiusSlider.value, forKey: "Radius")
+    }
+    
+    @IBAction func radiusTFChanged(_ sender: Any) {
+        if Float(radiusTF.text!)! > 10000.0 {
+            radiusTF.text = String(format: "%.0f", 10000.0)
+            radiusSlider.value = 10000.0
+        } else {
+            radiusSlider.value = Float(radiusTF.text!)!
+        }
+        Settings.radius = Float(radiusTF.text!)!
+        UserDefaults.standard.set(Float(radiusTF.text!)!, forKey: "Radius")
+    }
+}
 
+class Settings {
+    static var radius: Float = 4000
 }

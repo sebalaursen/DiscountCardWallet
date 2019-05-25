@@ -10,15 +10,14 @@ import UIKit
 
 class MapStarViewController: UIViewController {
     
-    weak var parVC: ViewController!
+    weak var parVC: UIViewController!
     
     var favBtn: UIButton = {
         let view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setTitle("Favorite", for: .normal)
-        view.frame = CGRect(x: 0, y: 0, width: 200, height: 60)
         view.addTarget(self, action: #selector(favAction), for: .touchUpInside)
-        view.backgroundColor = .gray
+        view.backgroundColor = .lightGray
         return view
     }()
     var mapBtn: UIButton = {
@@ -26,6 +25,7 @@ class MapStarViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setTitle("Find on map", for: .normal)
         view.addTarget(self, action: #selector(mapAction), for: .touchUpInside)
+        view.backgroundColor = .lightGray
         return view
     }()
 

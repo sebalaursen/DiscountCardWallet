@@ -21,6 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (enableAllOrientation == true){
             return UIInterfaceOrientationMask.allButUpsideDown
         }
+        if UserDefaults.standard.object(forKey: "Radius") != nil {
+            Settings.radius = UserDefaults.standard.float(forKey: "Radius")
+        } else {
+            Settings.radius = 5000.0
+        }
         //CoreDataStack().deleteAllData("Card")
         return UIInterfaceOrientationMask.portrait
     }
@@ -55,7 +60,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         coreData.saveContext()
     }
-    
-    // MARK: - Core Data stack
-    
 }

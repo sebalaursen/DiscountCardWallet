@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         setupSearchController()
+        hideKeyboardWhenTappedAround()
         panGesture()
     }
     
@@ -55,16 +56,18 @@ class ViewController: UIViewController {
     
     @objc private func handleGesture(sender: UIPanGestureRecognizer) {
         
-        if sender.velocity(in: self.view).y < 0 {
-            UIView.animate(withDuration: 0.3) {
-                if self.view.frame.origin.y == 0 {
-                    self.view.frame.origin.y -= self.mapStarView.view.frame.height
+        if Wallet.shared.cards.count != 0 {
+            if sender.velocity(in: self.view).y < 0 {
+                UIView.animate(withDuration: 0.3) {
+                    if self.view.frame.origin.y == 0 {
+                        self.view.frame.origin.y -= self.mapStarView.view.frame.height
+                    }
                 }
-            }
-        } else {
-            UIView.animate(withDuration: 0.3) {
-                if self.view.frame.origin.y == -self.mapStarView.view.frame.height {
-                    self.view.frame.origin.y += self.mapStarView.view.frame.height
+            } else {
+                UIView.animate(withDuration: 0.3) {
+                    if self.view.frame.origin.y == -self.mapStarView.view.frame.height {
+                        self.view.frame.origin.y += self.mapStarView.view.frame.height
+                    }
                 }
             }
         }
@@ -82,7 +85,7 @@ class ViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Cards"
-        searchController.searchBar.tintColor = UIColor(red: 235/255, green: 70/255, blue: 145/255, alpha: 1)
+        searchController.searchBar.tintColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1)
         searchController.searchBar.delegate = self
         definesPresentationContext = true
     }

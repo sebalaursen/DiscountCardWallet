@@ -28,7 +28,7 @@ class TabBarViewController:  UITabBarController, UITabBarControllerDelegate {
     {
         switch selectedIndex {
         case 0:
-            break
+            ((self.viewControllers![0] as? UINavigationController)?.viewControllers[0] as? FavoirtesViewController)?.hideMapStar()
         case 1:
             ((self.viewControllers![1] as? UINavigationController)?.viewControllers[0] as? ViewController)?.hideMapStar()
         default:

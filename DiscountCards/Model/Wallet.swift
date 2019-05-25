@@ -48,4 +48,13 @@ class Wallet {
         }
         return res
     }
+    
+    func hasFavs() -> Bool {
+        for c in cards {
+            if c.isFav {
+                return true
+            }
+        }
+        return false
+    }
 }
