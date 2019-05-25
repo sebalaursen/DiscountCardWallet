@@ -163,10 +163,12 @@ class FavoirtesViewController: UIViewController {
     }
     
     @objc func onRemovingCard(notif: Notification) {
-        if let userInfo = notif.userInfo as? [Int : Int] {
-            if let index = userInfo[0] {
-                collectionView.deleteItems(at: [[0, index]])
-                collectionView.scaledVisibleCells()
+        if cards.count != 0 {
+            if let userInfo = notif.userInfo as? [Int : Int] {
+                if let index = userInfo[0] {
+                    collectionView.deleteItems(at: [[0, index]])
+                    collectionView.scaledVisibleCells()
+                }
             }
         }
     }

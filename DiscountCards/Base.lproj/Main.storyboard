@@ -153,7 +153,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="P6T-fi-i5O" firstAttribute="trailing" secondItem="iEU-Cp-huy" secondAttribute="trailing" id="2xf-18-9Pi"/>
                             <constraint firstItem="yNV-YC-5gv" firstAttribute="trailing" secondItem="Poo-4j-RWa" secondAttribute="trailing" id="5pA-py-BLz"/>
@@ -200,28 +200,29 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController restorationIdentifier="cardVC" storyboardIdentifier="cardVC" id="BYZ-38-t0r" customClass="ViewController" customModule="DiscountCards" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="ExpandableView" customModule="DiscountCards" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Cards" id="916-Ww-f2d">
                         <barButtonItem key="leftBarButtonItem" systemItem="compose" id="MAN-Oc-eKx">
-                            <color key="tintColor" red="0.91979610919952393" green="0.27503427863121033" blue="0.56864362955093384" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="tintColor" red="0.059750759602040696" green="0.73054806472081224" blue="0.011373877578434584" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="editBtn:" destination="BYZ-38-t0r" id="8yn-eV-Tlw"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="bMn-sa-5c5">
+                                <color key="tintColor" red="0.059750759600000002" green="0.7305480647" blue="0.01137387758" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <action selector="addBtn:" destination="BYZ-38-t0r" id="8n2-nY-4O6"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="search" id="z0T-v1-Q8U">
-                                <color key="tintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.059750759600000002" green="0.7305480647" blue="0.01137387758" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <action selector="searchBtn:" destination="BYZ-38-t0r" id="afX-ZD-O3l"/>
                                 </connections>
@@ -351,7 +352,7 @@
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="value" red="0.059750759600000002" green="0.7305480647" blue="0.01137387758" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </tabBar>
@@ -369,28 +370,29 @@
         <scene sceneID="ulL-vg-O8n">
             <objects>
                 <viewController restorationIdentifier="favCardsVC" storyboardIdentifier="favCardsVC" id="UXi-4j-4mV" customClass="FavoirtesViewController" customModule="DiscountCards" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="OrI-eM-4qh">
+                    <view key="view" contentMode="scaleToFill" id="OrI-eM-4qh" customClass="ExpandableView" customModule="DiscountCards" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="iLF-7b-LfT"/>
                     </view>
                     <navigationItem key="navigationItem" title="Cards" id="BvD-z0-dhu">
                         <barButtonItem key="leftBarButtonItem" systemItem="compose" id="8bc-aX-CqR">
-                            <color key="tintColor" red="0.91979610919999999" green="0.27503427860000002" blue="0.56864362960000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="tintColor" red="0.059750759600000002" green="0.7305480647" blue="0.01137387758" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="editBtn:" destination="UXi-4j-4mV" id="eVb-7z-S7a"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="out-oT-zmN">
+                                <color key="tintColor" red="0.059750759600000002" green="0.7305480647" blue="0.01137387758" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <action selector="addBtn:" destination="UXi-4j-4mV" id="vTm-xt-Ui7"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="search" id="D09-Ze-i9D">
-                                <color key="tintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.059750759600000002" green="0.7305480647" blue="0.01137387758" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <action selector="searchBtn:" destination="UXi-4j-4mV" id="C3E-TB-Oa2"/>
                                 </connections>
@@ -409,7 +411,7 @@
         <image name="Wallet" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LR6-u9-RHk"/>
+        <segue reference="74M-7J-Mch"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

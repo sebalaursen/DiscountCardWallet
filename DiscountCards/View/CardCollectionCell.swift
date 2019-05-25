@@ -60,10 +60,11 @@ class cardCollectionCellImage: UICollectionViewCell {
     }()
     
     @objc func addToFavs(sender: cardCollectionCellImage) {
-        
+        print("pppp")
     }
     
     func setup() {
+        
         self.starButton.addTarget(self, action: #selector (addToFavs(sender: )), for: .touchUpInside)
         
         addSubview(cellView)

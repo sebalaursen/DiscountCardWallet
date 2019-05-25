@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E08601A22995B7A00705C65 /* MapStarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E08601922995B7A00705C65 /* MapStarViewController.swift */; };
 		9E21E2DC22973B4B00EBAC05 /* FavoirtesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E21E2DB22973B4B00EBAC05 /* FavoirtesViewController.swift */; };
 		9E2CA7962266951800AA2093 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA7952266951800AA2093 /* Wallet.swift */; };
 		9E2CA7992266B37000AA2093 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA7982266B37000AA2093 /* Extensions.swift */; };
@@ -25,11 +26,13 @@
 		9ED5A1CF221C615D002A7B5C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1CA221C615D002A7B5C /* TabBarViewController.swift */; };
 		9ED5A1D4221C6171002A7B5C /* ScannerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1D1221C6170002A7B5C /* ScannerManager.swift */; };
 		9ED5A1D5221C6171002A7B5C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1D2221C6171002A7B5C /* CoreDataStack.swift */; };
+		9EF381CA2299A23700A04B77 /* ExpandableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF381C92299A23700A04B77 /* ExpandableView.swift */; };
 		BF3DE0642E2EAF8F763CADC7 /* Pods_DiscountCards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5C359555FE7EA5DB94A7C9 /* Pods_DiscountCards.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		470765B8FF62F3425187F84D /* Pods-DiscountCards.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscountCards.debug.xcconfig"; path = "Target Support Files/Pods-DiscountCards/Pods-DiscountCards.debug.xcconfig"; sourceTree = "<group>"; };
+		9E08601922995B7A00705C65 /* MapStarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStarViewController.swift; sourceTree = "<group>"; };
 		9E21E2DB22973B4B00EBAC05 /* FavoirtesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoirtesViewController.swift; sourceTree = "<group>"; };
 		9E2CA7952266951800AA2093 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		9E2CA7982266B37000AA2093 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -50,6 +53,7 @@
 		9ED5A1CA221C615D002A7B5C /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		9ED5A1D1221C6170002A7B5C /* ScannerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerManager.swift; sourceTree = "<group>"; };
 		9ED5A1D2221C6171002A7B5C /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		9EF381C92299A23700A04B77 /* ExpandableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableView.swift; sourceTree = "<group>"; };
 		BE6882DEC6C111C9C08B90EC /* Pods-DiscountCards.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscountCards.release.xcconfig"; path = "Target Support Files/Pods-DiscountCards/Pods-DiscountCards.release.xcconfig"; sourceTree = "<group>"; };
 		FB5C359555FE7EA5DB94A7C9 /* Pods_DiscountCards.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DiscountCards.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -123,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				9ED5A1C9221C615D002A7B5C /* CardCollectionCell.swift */,
+				9EF381C92299A23700A04B77 /* ExpandableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				9ED5A1C6221C615D002A7B5C /* EditViewController.swift */,
 				9ED5A1C7221C615D002A7B5C /* SettingsViewController.swift */,
 				9E21E2DB22973B4B00EBAC05 /* FavoirtesViewController.swift */,
+				9E08601922995B7A00705C65 /* MapStarViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -303,6 +309,8 @@
 				9E21E2DC22973B4B00EBAC05 /* FavoirtesViewController.swift in Sources */,
 				9E2CA7992266B37000AA2093 /* Extensions.swift in Sources */,
 				9ED5A1AB221C5FE4002A7B5C /* AppDelegate.swift in Sources */,
+				9EF381CA2299A23700A04B77 /* ExpandableView.swift in Sources */,
+				9E08601A22995B7A00705C65 /* MapStarViewController.swift in Sources */,
 				9ED5A1CF221C615D002A7B5C /* TabBarViewController.swift in Sources */,
 				9ED5A1C3221C6016002A7B5C /* Card.swift in Sources */,
 			);

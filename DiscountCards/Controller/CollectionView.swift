@@ -18,6 +18,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         self.view.addSubview(collectionView)
+        collectionView.backgroundColor = .lightGray
+        collectionView.tintColor = .lightGray
         
         collectionView.setScaledDesginParam(scaledPattern: .HorizontalCenter, maxScale: 1.2, minScale: 0.5, maxAlpha: 1.0, minAlpha: 0.7)
         
