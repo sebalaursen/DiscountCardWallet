@@ -72,9 +72,11 @@ class ViewController: UIViewController {
         collectionView.scaledVisibleCells() //need?
     }
     
-//    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-//
-//    }
+    func hideMapStar() {
+        if self.view.frame.origin.y == -self.mapStarView.view.frame.height {
+            self.view.frame.origin.y += self.mapStarView.view.frame.height
+        }
+    }
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self

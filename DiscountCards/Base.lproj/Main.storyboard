@@ -153,7 +153,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="P6T-fi-i5O" firstAttribute="trailing" secondItem="iEU-Cp-huy" secondAttribute="trailing" id="2xf-18-9Pi"/>
                             <constraint firstItem="yNV-YC-5gv" firstAttribute="trailing" secondItem="Poo-4j-RWa" secondAttribute="trailing" id="5pA-py-BLz"/>
@@ -203,7 +203,7 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="ExpandableView" customModule="DiscountCards" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -340,10 +340,10 @@
             </objects>
             <point key="canvasLocation" x="996" y="-22"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="Bla-hz-RaT">
             <objects>
-                <tabBarController id="cl3-hU-Lv4" sceneMemberID="viewController">
+                <tabBarController id="cl3-hU-Lv4" customClass="TabBarViewController" customModule="DiscountCards" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QuH-Sd-JAS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -373,7 +373,7 @@
                     <view key="view" contentMode="scaleToFill" id="OrI-eM-4qh" customClass="ExpandableView" customModule="DiscountCards" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="iLF-7b-LfT"/>
                     </view>

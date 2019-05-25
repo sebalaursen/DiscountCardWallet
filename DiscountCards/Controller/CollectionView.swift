@@ -17,9 +17,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         layout.scrollDirection = .horizontal
         
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        //collectionView.backgroundColor = UIColor(red: 239/255, green: 239/255, blue: 244/255, alpha: 1)
         self.view.addSubview(collectionView)
-        collectionView.backgroundColor = .lightGray
-        collectionView.tintColor = .lightGray
         
         collectionView.setScaledDesginParam(scaledPattern: .HorizontalCenter, maxScale: 1.2, minScale: 0.5, maxAlpha: 1.0, minAlpha: 0.7)
         
@@ -143,6 +142,7 @@ extension FavoirtesViewController: UICollectionViewDelegate, UICollectionViewDat
         
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         self.view.addSubview(collectionView)
+        //collectionView.backgroundColor = UIColor(red: 239/255, green: 239/255, blue: 244/255, alpha: 1)
         
         collectionView.setScaledDesginParam(scaledPattern: .HorizontalCenter, maxScale: 1.2, minScale: 0.5, maxAlpha: 1.0, minAlpha: 0.7)
         
