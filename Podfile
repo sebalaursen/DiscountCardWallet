@@ -8,5 +8,6 @@ target 'DiscountCards' do
   # Pods for DiscountCards
   pod 'BarcodeScanner'
   pod "ScaledVisibleCellsCollectionView"
+  pod 'Locksmith'
 use_frameworks!
 end

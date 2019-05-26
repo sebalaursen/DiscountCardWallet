@@ -11,17 +11,10 @@ import AVFoundation
 
 class TabBarViewController:  UITabBarController, UITabBarControllerDelegate {
     
-    let addBtn = UIButton(type: .custom)
-    let scannerManager = ScannerManager()
-    
     override func viewDidLoad(){
         super.viewDidLoad()
         delegate = self
         
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem)

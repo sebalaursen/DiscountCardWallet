@@ -28,7 +28,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func radiusSliderChanged(_ sender: Any) {
         radiusTF.text = String(format: "%.0f", radiusSlider.value)
-        UserDefaults.standard.set(radiusSlider.value, forKey: "Radius")
+        UserDefaults.standard.set(radiusSlider.value, forKey: "Radius"+Wallet.shared.owner)
     }
     
     @IBAction func radiusTFChanged(_ sender: Any) {
@@ -39,10 +39,14 @@ class SettingsViewController: UIViewController {
             radiusSlider.value = Float(radiusTF.text!)!
         }
         Settings.radius = Float(radiusTF.text!)!
-        UserDefaults.standard.set(Float(radiusTF.text!)!, forKey: "Radius")
+        UserDefaults.standard.set(Float(radiusTF.text!)!, forKey: "Radius"+Wallet.shared.owner)
+    }
+    
+    @IBAction func logOutBtn(_ sender: Any) {
+        performSegue(withIdentifier: "logOutSegue", sender: nil)
     }
 }
 
 class Settings {
-    static var radius: Float = 4000
+    static var radius: Float =  UserDefaults.standard.float(forKey: "Radius"+Wallet.shared.owner)
 }

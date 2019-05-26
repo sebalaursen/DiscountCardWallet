@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "Locksmith.h"
 
-FOUNDATION_EXPORT double AnimatedCollectionViewLayoutVersionNumber;
-FOUNDATION_EXPORT const unsigned char AnimatedCollectionViewLayoutVersionString[];
+FOUNDATION_EXPORT double LocksmithVersionNumber;
+FOUNDATION_EXPORT const unsigned char LocksmithVersionString[];
 

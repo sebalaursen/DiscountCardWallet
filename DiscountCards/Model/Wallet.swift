@@ -11,8 +11,8 @@ import UIKit
 class Wallet {
     static let shared = Wallet()
     
+    var owner: String!
     var cards: [card] = []
-    let coreData = CoreDataStack()
     
     private init() {}
     
@@ -21,21 +21,21 @@ class Wallet {
             
         } else {
             cards.append(card)
-            coreData.add(logo: card.logo, title: card.title, barcode: card.barcode)
+            CoreDataStack().add(logo: card.logo, title: card.title, barcode: card.barcode)
             NotificationCenter.default.post(name: .addedCard, object: nil)
         }
     }
     
     func remove(at index: Int) {
         cards.remove(at: index)
-        coreData.delete(at: index)
+        CoreDataStack().delete(at: index)
         NotificationCenter.default.post(name: .removedCard, object: nil, userInfo: [0:index])
     }
     
     func edit(at index: Int, to card: card) {
         cards[index].logo = card.logo
         cards[index].title = card.title
-        coreData.edit(logo: card.logo, title: card.title, barcode: card.barcode, at: index)
+        CoreDataStack().edit(logo: card.logo, title: card.title, barcode: card.barcode, at: index)
         NotificationCenter.default.post(name: .editedCard, object: nil)
     }
     

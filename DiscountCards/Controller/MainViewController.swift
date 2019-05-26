@@ -42,7 +42,6 @@ class ViewController: UIViewController {
     
     private func setup() {
         mapStarView.view.frame = CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: self.view.bounds.maxY * 0.35)
-        mapStarView.view.backgroundColor = .red
         mapStarView.parVC = self
         
         self.addChild(mapStarView)

@@ -21,19 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (enableAllOrientation == true){
             return UIInterfaceOrientationMask.allButUpsideDown
         }
-        if UserDefaults.standard.object(forKey: "Radius") != nil {
-            Settings.radius = UserDefaults.standard.float(forKey: "Radius")
-        } else {
-            Settings.radius = 5000.0
-        }
-        //CoreDataStack().deleteAllData("Card")
+        CoreDataStack().deleteAllData("Card")
         return UIInterfaceOrientationMask.portrait
     }
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        coreData.load(Wallet.shared)
         return true
     }
     
