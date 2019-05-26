@@ -36,7 +36,9 @@ extension UIViewController {
 
 extension Notification.Name {
     static let addedCard = Notification.Name("addedCard")
+    static let addedFavCard = Notification.Name("addedFavCard")
     static let removedCard = Notification.Name("removedCard")
+    static let removedFavCard = Notification.Name("removedFavCard")
     static let editedCard = Notification.Name("editedCard")
     static let appLoaded = Notification.Name("appLoaded")
     static let alreadyExists = Notification.Name("alreadyExists")

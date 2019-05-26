@@ -11,6 +11,9 @@
 		9E21E2DC22973B4B00EBAC05 /* FavoirtesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E21E2DB22973B4B00EBAC05 /* FavoirtesViewController.swift */; };
 		9E2CA7962266951800AA2093 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA7952266951800AA2093 /* Wallet.swift */; };
 		9E2CA7992266B37000AA2093 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA7982266B37000AA2093 /* Extensions.swift */; };
+		9EB1658C229A58A3004E9801 /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB1658B229A58A3004E9801 /* CoreLocationManager.swift */; };
+		9EB16591229A7F18004E9801 /* FetchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB16590229A7F18004E9801 /* FetchData.swift */; };
+		9EB16593229A7FE1004E9801 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB16592229A7FE1004E9801 /* Data.swift */; };
 		9EBE20212299F76C007952A8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE20202299F76C007952A8 /* SignInViewController.swift */; };
 		9EBE20232299F78C007952A8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE20222299F78C007952A8 /* SignUpViewController.swift */; };
 		9ED5A1AB221C5FE4002A7B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5A1AA221C5FE4002A7B5C /* AppDelegate.swift */; };
@@ -38,6 +41,9 @@
 		9E21E2DB22973B4B00EBAC05 /* FavoirtesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoirtesViewController.swift; sourceTree = "<group>"; };
 		9E2CA7952266951800AA2093 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		9E2CA7982266B37000AA2093 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9EB1658B229A58A3004E9801 /* CoreLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
+		9EB16590229A7F18004E9801 /* FetchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchData.swift; sourceTree = "<group>"; };
+		9EB16592229A7FE1004E9801 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		9EBE20202299F76C007952A8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9EBE20222299F78C007952A8 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9ED5A1A7221C5FE4002A7B5C /* DiscountCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscountCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,8 +83,10 @@
 		9E2CA79422664FF400AA2093 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				9EB1658D229A7EDD004E9801 /* Networking */,
 				9ED5A1D2221C6171002A7B5C /* CoreDataStack.swift */,
 				9ED5A1D1221C6170002A7B5C /* ScannerManager.swift */,
+				9EB1658B229A58A3004E9801 /* CoreLocationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -89,6 +97,14 @@
 				9E2CA7982266B37000AA2093 /* Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9EB1658D229A7EDD004E9801 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9EB16590229A7F18004E9801 /* FetchData.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		9ED5A19E221C5FE4002A7B5C = {
@@ -158,6 +174,7 @@
 			children = (
 				9ED5A1C2221C6016002A7B5C /* Card.swift */,
 				9E2CA7952266951800AA2093 /* Wallet.swift */,
+				9EB16592229A7FE1004E9801 /* Data.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -306,6 +323,7 @@
 			files = (
 				9ED5A1AD221C5FE4002A7B5C /* MainViewController.swift in Sources */,
 				9ED5A1CE221C615D002A7B5C /* CardCollectionCell.swift in Sources */,
+				9EB16591229A7F18004E9801 /* FetchData.swift in Sources */,
 				9ED5A1C5221C60A4002A7B5C /* CollectionView.swift in Sources */,
 				9E2CA7962266951800AA2093 /* Wallet.swift in Sources */,
 				9ED5A1CD221C615D002A7B5C /* AddViewController.swift in Sources */,
@@ -315,12 +333,14 @@
 				9ED5A1CB221C615D002A7B5C /* EditViewController.swift in Sources */,
 				9ED5A1D5221C6171002A7B5C /* CoreDataStack.swift in Sources */,
 				9ED5A1B3221C5FE4002A7B5C /* DiscountCards.xcdatamodeld in Sources */,
+				9EB16593229A7FE1004E9801 /* Data.swift in Sources */,
 				9E21E2DC22973B4B00EBAC05 /* FavoirtesViewController.swift in Sources */,
 				9E2CA7992266B37000AA2093 /* Extensions.swift in Sources */,
 				9ED5A1AB221C5FE4002A7B5C /* AppDelegate.swift in Sources */,
 				9EF381CA2299A23700A04B77 /* ExpandableView.swift in Sources */,
 				9EBE20212299F76C007952A8 /* SignInViewController.swift in Sources */,
 				9E08601A22995B7A00705C65 /* MapStarViewController.swift in Sources */,
+				9EB1658C229A58A3004E9801 /* CoreLocationManager.swift in Sources */,
 				9ED5A1CF221C615D002A7B5C /* TabBarViewController.swift in Sources */,
 				9ED5A1C3221C6016002A7B5C /* Card.swift in Sources */,
 			);

@@ -15,7 +15,6 @@ class FavoirtesViewController: UIViewController {
     private let mapStarView = MapStarViewController()
     var collectionView: UICollectionView!
     var filteredCards: [card] = []
-    var cards: [card] = []
     let searchController = UISearchController(searchResultsController: nil)
     let cellIdentifier1 = "CollectionCellImage"
     let cellIdentifier2 = "CollectionCellLabel"
@@ -26,19 +25,19 @@ class FavoirtesViewController: UIViewController {
         setupCollectionView()
         setupSearchController()
         hideKeyboardWhenTappedAround()
+        setupNotifications()
         panGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupNotifications()
+        collectionView.reloadData()
         collectionView.scaledVisibleCells()
         setup()
-        cards = Wallet.shared.getFavs()
     }
     
     func setupNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onAddingCard), name: .addedCard, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onRemovingCard(notif:)), name: .removedCard, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onAddingCard), name: .addedFavCard, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onRemovingCard(notif:)), name: .removedFavCard, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onEditingCard), name: .editedCard, object: nil)
     }
     
@@ -52,7 +51,7 @@ class FavoirtesViewController: UIViewController {
     }
     
     private func setup() {
-        mapStarView.view.frame = CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: self.view.bounds.maxY * 0.35)
+        mapStarView.view.frame = CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: self.view.bounds.maxY * 0.25)
         mapStarView.parVC = self
         
         self.addChild(mapStarView)
@@ -74,15 +73,22 @@ class FavoirtesViewController: UIViewController {
                     }
                 }
             } else {
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.2, animations:  {
                     if self.view.frame.origin.y == -self.mapStarView.view.frame.height {
                         self.view.frame.origin.y += self.mapStarView.view.frame.height
                     }
+                    else if self.view.bounds.maxY - self.view.frame.height * 0.35 == self.view.frame.height * 0.65 {
+                        self.view.frame.origin.y -= self.view.frame.origin.y
+                        self.mapStarView.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.width, height: self.view.bounds.maxY * 0.25)
+                    }
+                }) { (finished) in
+                    self.mapStarView.map.removeFromSuperview()
+                    self.mapStarView.setup()
+                    self.collectionView.isScrollEnabled = true
                 }
             }
         }
-        
-        collectionView.scaledVisibleCells() //need?
+        collectionView.scaledVisibleCells()
     }
     
     func hideMapStar() {
@@ -96,7 +102,7 @@ class FavoirtesViewController: UIViewController {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredCards = cards.filter({( card : card) -> Bool in
+        filteredCards = Wallet.shared.getFavs().filter({( card : card) -> Bool in
             return card.title.lowercased().contains(searchText.lowercased())
         })
         
@@ -126,45 +132,6 @@ class FavoirtesViewController: UIViewController {
         return nil
     }
     
-    func addToFavs(cell: cardCollectionCellImage?, cell1: cardCollectionCellLabel?) {
-        if let cel = cell {
-            guard let index = collectionView.indexPath(for: cel) else {return}
-            cel.starButton.tintColor = .yellow
-            Wallet.shared.cards[index.row].isFav = true
-            cards[index.row].isFav = true
-            
-            let ed = Wallet.shared.cards[index.row]
-            CoreDataStack().edit(logo: ed.logo, title: ed.title, barcode: ed.barcode, at: index.row, fav: true)
-        } else if let cel = cell1 {
-            guard let index = collectionView.indexPath(for: cel) else {return}
-            cel.starButton.tintColor = .yellow
-            Wallet.shared.cards[index.row].isFav = true
-            cards[index.row].isFav = true
-            
-            let ed = Wallet.shared.cards[index.row]
-            CoreDataStack().edit(logo: nil, title: ed.title, barcode: ed.barcode, at: index.row, fav: true)
-        }
-    }
-    
-    func removeFromFavs(cell: cardCollectionCellImage?, cell1: cardCollectionCellLabel?) {
-        if let cel = cell {
-            guard let index = collectionView.indexPath(for: cel) else {return}
-            cel.starButton.tintColor = .darkGray
-            Wallet.shared.cards[index.row].isFav = false
-            cards[index.row].isFav = false
-            
-            let ed = cards[index.row]
-            CoreDataStack().edit(logo: ed.logo, title: ed.title, barcode: ed.barcode, at: index.row, fav: false)
-        } else if let cel = cell1 {
-            guard let index = collectionView.indexPath(for: cel) else {return}
-            cel.starButton.tintColor = .darkGray
-            Wallet.shared.cards[index.row].isFav = false
-            cards[index.row].isFav = false
-            
-            let ed = cards[index.row]
-            CoreDataStack().edit(logo: nil, title: ed.title, barcode: ed.barcode, at: index.row, fav: false)
-        }
-    }
     @IBAction func editBtn(_ sender: Any) {
         let cells = collectionView.visibleCells
         guard let selectedCell = getSelectedCell(cells: cells) else {
@@ -173,9 +140,9 @@ class FavoirtesViewController: UIViewController {
         let indexpath = collectionView.indexPath(for: selectedCell)
         
         let editController = storyboard!.instantiateViewController(withIdentifier: "editVC") as! EditViewController
-        editController.delegate = self
+        editController.delegate1 = self
         editController.cellIndex = indexpath!.row
-        editController.card = cards[indexpath!.row]
+        editController.card = Wallet.shared.getFavs()[indexpath!.row]
         self.present(editController, animated: true, completion: nil)
     }
     
@@ -199,22 +166,14 @@ class FavoirtesViewController: UIViewController {
     }
     
     @objc func onAddingCard() {
-        if cards.count != 0 { //temporary, because observer, need to add new observer for this view
-            collectionView.insertItems(at: [[0, cards.count - 1]])
-            collectionView.scrollToItem(at: [0, cards.count - 1], at: .centeredHorizontally, animated: true)
-            collectionView.scaledVisibleCells()
-        }
+        collectionView.reloadData()
+        collectionView.scaledVisibleCells()
+        ((self.tabBarController!.viewControllers![1] as? UINavigationController)?.viewControllers[0] as? FavoirtesViewController)?.collectionView.reloadData()
     }
     
     @objc func onRemovingCard(notif: Notification) {
-        if cards.count != 0 {
-            if let userInfo = notif.userInfo as? [Int : Int] {
-                if let index = userInfo[0] {
-                    collectionView.deleteItems(at: [[0, index]])
-                    collectionView.scaledVisibleCells()
-                }
-            }
-        }
+        collectionView.reloadData()
+        ((self.tabBarController!.viewControllers![1] as? UINavigationController)?.viewControllers[0] as? FavoirtesViewController)?.collectionView.reloadData()
     }
     
     @objc func onEditingCard() {
@@ -222,24 +181,19 @@ class FavoirtesViewController: UIViewController {
     }
 }
 
-extension FavoirtesViewController: cardDelegate {
+extension FavoirtesViewController: UISearchResultsUpdating, UISearchBarDelegate, favCardDelegate {
     func addCard(card: card) {
-        Wallet.shared.add(card)
-        cards.append(card)
+        Wallet.shared.addFav(card)
     }
     
     func removeCard(index: Int) {
-        Wallet.shared.remove(at: index)
-        cards.remove(at: index)
+        Wallet.shared.removeFav(at: index)
     }
     
     func editCard(card: card, index: Int) {
         Wallet.shared.edit(at: index, to: card)
-        cards[index] = card
     }
-}
-
-extension FavoirtesViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }

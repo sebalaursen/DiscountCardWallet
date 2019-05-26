@@ -21,6 +21,15 @@ struct card: Equatable, Hashable {
         self.barcode = barcode
         self.title = title
     }
+    
+    init(backgroundColor: UIColor, logo: String?, barcode: String, title: String, isFav: Bool) {
+        self.backgroundColor = backgroundColor
+        self.logo = logo
+        self.barcode = barcode
+        self.title = title
+        self.isFav = isFav
+    }
+    
     static func == (lhs: card, rhs: card) -> Bool {
         return lhs.barcode == rhs.barcode
     }

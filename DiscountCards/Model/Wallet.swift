@@ -26,10 +26,28 @@ class Wallet {
         }
     }
     
+    func addFav(_ card: card) {
+        if cards.contains(card) {
+            
+        } else {
+            cards.append(card)
+            CoreDataStack().addFav(logo: card.logo, title: card.title, barcode: card.barcode)
+            NotificationCenter.default.post(name: .addedFavCard, object: nil)
+        }
+    }
+    
     func remove(at index: Int) {
         cards.remove(at: index)
         CoreDataStack().delete(at: index)
         NotificationCenter.default.post(name: .removedCard, object: nil, userInfo: [0:index])
+    }
+    
+    func removeFav(at index: Int) {
+        if getFavs().count != 0 {
+            cards.remove(at: index)
+            CoreDataStack().delete(at: index)
+            NotificationCenter.default.post(name: .removedFavCard, object: nil, userInfo: [0:index])
+        }
     }
     
     func edit(at index: Int, to card: card) {
@@ -37,6 +55,10 @@ class Wallet {
         cards[index].title = card.title
         CoreDataStack().edit(logo: card.logo, title: card.title, barcode: card.barcode, at: index)
         NotificationCenter.default.post(name: .editedCard, object: nil)
+    }
+    
+    func empty() {
+        cards = []
     }
     
     func getFavs() -> [card] {

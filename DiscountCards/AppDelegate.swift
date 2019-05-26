@@ -9,6 +9,7 @@
 
 import UIKit
 import CoreData
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (enableAllOrientation == true){
             return UIInterfaceOrientationMask.allButUpsideDown
         }
-        CoreDataStack().deleteAllData("Card")
+        //CoreDataStack().deleteAllData("Card")
+        GMSPlacesClient.provideAPIKey("AIzaSyCy7lxkknPdTkZb8FjxtChmjrd8w_GExTo")
         return UIInterfaceOrientationMask.portrait
     }
     

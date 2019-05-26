@@ -43,6 +43,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func logOutBtn(_ sender: Any) {
+        CoreDataStack().saveContext()
         performSegue(withIdentifier: "logOutSegue", sender: nil)
     }
 }

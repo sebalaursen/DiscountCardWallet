@@ -60,6 +60,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             cell.logoView.image = UIImage(named: Wallet.shared.cards[indexPath.row].logo!)
             cell.barcodeView.image = fromString(string: filteredCards[indexPath.row].barcode)
             cell.linkToWallet = self
+            if filteredCards[indexPath.row].isFav {
+                cell.layer.cornerRadius = 16
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
+            }
             collectionView.scaledVisibleCells()
             return cell
         }
@@ -70,6 +75,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             cell.barcodeView.image = fromString(string: filteredCards[indexPath.row].barcode)
             cell.labelView.text = filteredCards[indexPath.row].title
             cell.linkToWallet = self
+            if filteredCards[indexPath.row].isFav {
+                cell.layer.cornerRadius = 16
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
+            }
             collectionView.scaledVisibleCells()
             return cell
         }
@@ -80,6 +90,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             cell.logoView.image = UIImage(named: Wallet.shared.cards[indexPath.row].logo!)//loadImage(fileName: cards[indexPath.row].logo!)
             cell.barcodeView.image = fromString(string: Wallet.shared.cards[indexPath.row].barcode)
             cell.linkToWallet = self
+            if Wallet.shared.cards[indexPath.row].isFav {
+                cell.layer.cornerRadius = 16
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
+            }
             collectionView.scaledVisibleCells()
             return cell
         }
@@ -90,6 +105,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             cell.barcodeView.image = fromString(string: Wallet.shared.cards[indexPath.row].barcode)
             cell.labelView.text = Wallet.shared.cards[indexPath.row].title
             cell.linkToWallet = self
+            if Wallet.shared.cards[indexPath.row].isFav {
+                cell.layer.cornerRadius = 16
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
+            }
             collectionView.scaledVisibleCells()
             return cell
         }
@@ -99,6 +119,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         cell.barcodeView.image = fromString(string: Wallet.shared.cards[indexPath.row].barcode)
         cell.labelView.text = Wallet.shared.cards[indexPath.row].title
         cell.linkToWallet = self
+        if Wallet.shared.cards[indexPath.row].isFav {
+            cell.layer.cornerRadius = 16
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
+        }
         return cell
     }
     
@@ -165,7 +190,7 @@ extension FavoirtesViewController: UICollectionViewDelegate, UICollectionViewDat
     
     
     func collectionViewAdd() {
-        collectionView.insertItems(at: [[0, cards.count - 1]])
+        collectionView.insertItems(at: [[0, Wallet.shared.getFavs().count - 1]])
         collectionView.scaledVisibleCells()
     }
     
@@ -173,17 +198,22 @@ extension FavoirtesViewController: UICollectionViewDelegate, UICollectionViewDat
         if (isFiltering()) {
             return filteredCards.count
         }
-        return cards.count
+        return Wallet.shared.getFavs().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if (isFiltering() && filteredCards[indexPath.row].logo != nil) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier1, for: indexPath) as! cardCollectionCellImage
+            let cards = Wallet.shared.getFavs()
             cell.index = indexPath.row
             cell.cellView.backgroundColor = .white//filteredCards[indexPath.row].backgroundColor
             cell.logoView.image = UIImage(named: cards[indexPath.row].logo!)
             cell.barcodeView.image = fromString(string: filteredCards[indexPath.row].barcode)
-            cell.linkToFav = self
+            if filteredCards[indexPath.row].isFav {
+                cell.layer.cornerRadius = 16
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
+            }
             collectionView.scaledVisibleCells()
             return cell
         }
@@ -193,36 +223,55 @@ extension FavoirtesViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.cellView.backgroundColor = .white//filteredCards[indexPath.row].backgroundColor
             cell.barcodeView.image = fromString(string: filteredCards[indexPath.row].barcode)
             cell.labelView.text = filteredCards[indexPath.row].title
-            cell.linkToFav = self
+            if filteredCards[indexPath.row].isFav {
+                cell.layer.cornerRadius = 16
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
+            }
             collectionView.scaledVisibleCells()
             return cell
         }
         else if (!isFiltering() && Wallet.shared.cards[indexPath.row].logo != nil) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier1, for: indexPath) as! cardCollectionCellImage
+            let cards = Wallet.shared.getFavs()
             cell.index = indexPath.row
             cell.cellView.backgroundColor = .white//cards[indexPath.row].backgroundColor
             cell.logoView.image = UIImage(named: cards[indexPath.row].logo!)//loadImage(fileName: cards[indexPath.row].logo!)
             cell.barcodeView.image = fromString(string: cards[indexPath.row].barcode)
-            cell.linkToFav = self
+            if Wallet.shared.getFavs()[indexPath.row].isFav {
+                cell.layer.cornerRadius = 16
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
+            }
             collectionView.scaledVisibleCells()
             return cell
         }
         else if (!isFiltering() && Wallet.shared.cards[indexPath.row].logo == nil) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier2, for: indexPath) as! cardCollectionCellLabel
+            let cards = Wallet.shared.getFavs()
             cell.index = indexPath.row
             cell.cellView.backgroundColor = .white//cards[indexPath.row].backgroundColor
             cell.barcodeView.image = fromString(string: cards[indexPath.row].barcode)
             cell.labelView.text = cards[indexPath.row].title
-            cell.linkToFav = self
+            if Wallet.shared.getFavs()[indexPath.row].isFav {
+                cell.layer.cornerRadius = 16
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
+            }
             collectionView.scaledVisibleCells()
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier2, for: indexPath) as! cardCollectionCellLabel
+        let cards = Wallet.shared.getFavs()
         cell.index = indexPath.row
         cell.cellView.backgroundColor = cards[indexPath.row].backgroundColor
         cell.barcodeView.image = fromString(string: cards[indexPath.row].barcode)
         cell.labelView.text = cards[indexPath.row].title
-        cell.linkToFav = self
+        if Wallet.shared.getFavs()[indexPath.row].isFav {
+            cell.layer.cornerRadius = 16
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
+        }
         return cell
     }
     

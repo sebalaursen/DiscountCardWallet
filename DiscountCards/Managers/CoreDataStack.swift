@@ -37,23 +37,28 @@ final class CoreDataStack {
     
     func load(_ wallet: Wallet) {
         let context = self.persistentContainer.viewContext
+        let request1 = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         let predicate = NSPredicate(format: "username == %@", Wallet.shared.owner)
         
         request.predicate = predicate
         request.returnsObjectsAsFaults = false
         do {
-            let results =  try context.fetch(request)
+            let results1 = try context.fetch(request1)
+            let results = try context.fetch(request)
+            var us = User()
             
-            if (results.count > 0) {
-                for result in results as! [NSManagedObject] {
-                    if let user = result as? User {
-                        if let cards = user.cards {
-                            for cardd in cards {
-                                if let c = cardd as? Card {
-                                    wallet.cards.append(card(backgroundColor: .white, logo: c.logo! , barcode: c.barcode!, title: c.title!))
-                                }
-                            }
+            if results.count > 0 {
+                us = results[0] as! User
+            }
+            print("\n\n\n \(us.username!)")
+            
+            if results1.count > 0 {
+                for result in results1 as! [NSManagedObject] {
+                    if let ca = result as? Card {
+                        if ca.user! == us {
+                            print(ca.logo!)
+                            wallet.cards.append(card(backgroundColor: .white, logo: ca.logo! , barcode: ca.barcode!, title: ca.title!))
                         }
                     }
                 }
@@ -83,6 +88,7 @@ final class CoreDataStack {
         let newNote = NSEntityDescription.insertNewObject(forEntityName: "Card", into: context)
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         let predicate = NSPredicate(format: "username == %@", Wallet.shared.owner)
+        print("---" + Wallet.shared.owner)
         
         request.predicate = predicate
         request.returnsObjectsAsFaults = false
@@ -95,6 +101,36 @@ final class CoreDataStack {
         
         do {
             let result =  try context.fetch(request)
+            print(result[0])
+            newNote.setValue(result[0], forKey: "user")
+            
+            try context.save()
+        }
+        catch {
+            let nserror = error as NSError
+            print("Error while adding data \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    func addFav(logo: String?, title: String, barcode: String) {
+        let context = self.persistentContainer.viewContext
+        let newNote = NSEntityDescription.insertNewObject(forEntityName: "Card", into: context)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        let predicate = NSPredicate(format: "username == %@", Wallet.shared.owner)
+        
+        request.predicate = predicate
+        request.returnsObjectsAsFaults = false
+        
+        newNote.setValue(title, forKey: "title")
+        newNote.setValue(barcode, forKey: "barcode")
+        newNote.setValue(true, forKey: "isFavorite")
+        if logo != nil {
+            newNote.setValue(logo, forKey: "logo")
+        }
+        
+        do {
+            let result =  try context.fetch(request)
+            print(result[0])
             newNote.setValue(result[0], forKey: "user")
             
             try context.save()

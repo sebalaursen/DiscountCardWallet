@@ -23,6 +23,7 @@ class SignInViewController: UIViewController {
             if let pass = Locksmith.loadDataForUserAccount(userAccount: loginTF.text!) {
                 if pass["Password"] as? String == passwordTF.text! {
                     Wallet.shared.owner = loginTF.text!
+                    Wallet.shared.empty()
                     CoreDataStack().load(Wallet.shared)
                     
                     performSegue(withIdentifier: "finishedSignInSegue", sender: nil)

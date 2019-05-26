@@ -31,6 +31,7 @@ class SignUpViewController: UIViewController {
                 do {
                     try Locksmith.saveData(data: ["Password" : passwordTF.text!], forUserAccount: usernameTF.text!)
                     Wallet.shared.owner = usernameTF.text!
+                    Wallet.shared.empty()
                     CoreDataStack().addUser(username: usernameTF.text!)
                     UserDefaults.standard.set(Float(5000), forKey: "Radius"+usernameTF.text!)
                     

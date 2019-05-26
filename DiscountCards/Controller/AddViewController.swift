@@ -8,11 +8,24 @@
 
 import UIKit
 
+protocol cardDelegate: class {
+    func addCard(card: card)
+    func removeCard(index: Int)
+    func editCard(card: card, index: Int)
+}
+
+protocol favCardDelegate: class {
+    func addCard(card: card)
+    func removeCard(index: Int)
+    func editCard(card: card, index: Int)
+}
+
 class AddViewController: UIViewController {
     
     var code: String?
     weak var delegate: cardDelegate?
-    let shops = [ "", "CCC", "Watsons", "Рукавичка", "Other"]
+    weak var delegate1: favCardDelegate?
+    let shops = [ "", "CCC", "Watsons", "Rukavychka", "Other"]
     var pickedShop: String?
     
     @IBOutlet weak var shopTF: UITextField!
@@ -76,10 +89,12 @@ class AddViewController: UIViewController {
     @IBAction func doneBtn(_ sender: Any) {
         if (shopTF.text != "" && titleTF.text != "" && shopTF.text != "Other") {
             delegate?.addCard(card: card(backgroundColor: getRandomColor(), logo: shopTF.text, barcode: self.code!, title: titleTF.text!))
+            delegate1?.addCard(card: card(backgroundColor: getRandomColor(), logo: shopTF.text, barcode: self.code!, title: titleTF.text!, isFav: true))
             performSegue(withIdentifier: "doneAddingSegue", sender: nil)
         }
         else if (shopTF.text != "" && titleTF.text != "") {
             delegate?.addCard(card: card(backgroundColor: getRandomColor(), logo: nil, barcode: self.code!, title: titleTF.text!))
+            delegate1?.addCard(card: card(backgroundColor: getRandomColor(), logo: nil, barcode: self.code!, title: titleTF.text!, isFav: true))
             performSegue(withIdentifier: "doneAddingSegue", sender: nil)
         }
         else {

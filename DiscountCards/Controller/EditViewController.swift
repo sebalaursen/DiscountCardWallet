@@ -14,7 +14,8 @@ class EditViewController: UIViewController {
     var pickedShop: String?
     var card: card?
     weak var delegate: cardDelegate?
-    let shops = [ "", "CCC", "Watsons", "Рукавичка", "Other"]
+    weak var delegate1: favCardDelegate?
+    let shops = [ "", "CCC", "Watsons", "Rukavychka", "Other"]
     
     @IBOutlet weak var shopTF: UITextField!
     @IBOutlet weak var titleTF: UITextField!
@@ -85,12 +86,14 @@ class EditViewController: UIViewController {
             card?.title = titleTF.text!
             card?.logo = nil
             delegate?.editCard(card: card!, index: cellIndex)
+            delegate1?.editCard(card: card!, index: cellIndex)
             performSegue(withIdentifier: "doneEditSegue", sender: nil)            
         }
         else if (shopTF.text != "" && titleTF.text != "") {
             card?.title = titleTF.text!
             card?.logo = shopTF.text!
             delegate?.editCard(card: card!, index: cellIndex)
+            delegate1?.editCard(card: card!, index: cellIndex)
             performSegue(withIdentifier: "doneEditSegue", sender: nil)
         }
         else {
@@ -108,6 +111,7 @@ class EditViewController: UIViewController {
     
     @IBAction func deleteBtn(_ sender: Any) {
         delegate?.removeCard(index: cellIndex)
+        delegate1?.removeCard(index: cellIndex)
         performSegue(withIdentifier: "doneEditSegue", sender: nil)
     }
 }

@@ -10,15 +10,10 @@ import UIKit
 import BarcodeScanner
 import AVFoundation
 
-protocol cardDelegate: class {
-    func addCard(card: card)
-    func removeCard(index: Int)
-    func editCard(card: card, index: Int)
-}
-
 class ScannerManager {
     
     weak var delegate: cardDelegate?
+    weak var delegate1: favCardDelegate?
     
     func showScanner(viewController: ViewController) {
         self.delegate = viewController
@@ -36,7 +31,7 @@ class ScannerManager {
     }
     
     func showScannerr(viewController: FavoirtesViewController) {
-        self.delegate = viewController
+        self.delegate1 = viewController
         
         let ScannerViewController = BarcodeScannerViewController()
         ScannerViewController.codeDelegate = self
@@ -82,6 +77,7 @@ extension ScannerManager: BarcodeScannerCodeDelegate, BarcodeScannerErrorDelegat
             
             addController.code = code
             addController.delegate = self.delegate
+            addController.delegate1 = self.delegate1
             controller.present(addController, animated: true, completion: nil)
         }
         else {

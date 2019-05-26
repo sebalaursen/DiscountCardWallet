@@ -50,27 +50,11 @@ class cardCollectionCellImage: UICollectionViewCell {
         return view
     }()
     
-    var starButton: UIButton = {
-        let star = UIImage(named: "Star")
-        let view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(star, for: .normal)
-        view.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        return view
-    }()
-    
-    @objc func addToFavs(sender: cardCollectionCellImage) {
-        print("pppp")
-    }
-    
     func setup() {
-        
-        self.starButton.addTarget(self, action: #selector (addToFavs(sender: )), for: .touchUpInside)
-        
+
         addSubview(cellView)
         cellView.addSubview(logoView)
         cellView.addSubview(barcodeView)
-        cellView.addSubview(starButton)
         
         cellView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         cellView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true

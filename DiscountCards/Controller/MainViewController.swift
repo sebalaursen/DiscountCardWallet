@@ -25,11 +25,12 @@ class ViewController: UIViewController {
         setupCollectionView()
         setupSearchController()
         hideKeyboardWhenTappedAround()
+        setupNotifications()
         panGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupNotifications()
+        collectionView.reloadData()
         collectionView.scaledVisibleCells()
         setup()
     }
@@ -41,11 +42,19 @@ class ViewController: UIViewController {
     }
     
     private func setup() {
-        mapStarView.view.frame = CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: self.view.bounds.maxY * 0.35)
+        mapStarView.view.frame = CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: self.view.bounds.maxY * 0.25)
         mapStarView.parVC = self
         
         self.addChild(mapStarView)
         self.view.addSubview(mapStarView.view)
+    }
+    
+    private func showSelected() {
+        if !Wallet.shared.cards.isEmpty {
+            let cell = getSelectedCell(cells: collectionView.visibleCells)
+            collectionView.scrollToItem(at: collectionView.indexPath(for: cell!)! , at: .centeredHorizontally, animated: true)
+            collectionView.isScrollEnabled = false
+        }
     }
     
     private func panGesture() {
@@ -62,16 +71,24 @@ class ViewController: UIViewController {
                         self.view.frame.origin.y -= self.mapStarView.view.frame.height
                     }
                 }
+                mapStarView.onDragOut()
             } else {
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.2, animations:  {
                     if self.view.frame.origin.y == -self.mapStarView.view.frame.height {
                         self.view.frame.origin.y += self.mapStarView.view.frame.height
                     }
+                    else if self.view.bounds.maxY - self.view.frame.height * 0.35 == self.view.frame.height * 0.65 {
+                        self.view.frame.origin.y -= self.view.frame.origin.y
+                        self.mapStarView.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.width, height: self.view.bounds.maxY * 0.25)
+                    }
+                }) { (finished) in
+                    self.mapStarView.map.removeFromSuperview()
+                    self.mapStarView.setup()
+                    self.collectionView.isScrollEnabled = true
                 }
             }
         }
-        
-        collectionView.scaledVisibleCells() //need?
+        collectionView.scaledVisibleCells()
     }
     
     func hideMapStar() {
@@ -105,7 +122,7 @@ class ViewController: UIViewController {
         return searchController.isActive && !searchBarIsEmpty()
     }
     
-    private func getSelectedCell(cells: [UICollectionViewCell]) -> UICollectionViewCell? {
+    func getSelectedCell(cells: [UICollectionViewCell]) -> UICollectionViewCell? {
         if (!cells.isEmpty) {
             var max = cells[0]
             if (cells.count == 1) {
@@ -122,42 +139,6 @@ class ViewController: UIViewController {
             return max
         }
         return nil
-    }
-    
-    func addToFavs(cell: cardCollectionCellImage?, cell1: cardCollectionCellLabel?) {
-        if let cel = cell {
-            guard let index = collectionView.indexPath(for: cel) else {return}
-            cel.starButton.tintColor = .yellow
-            Wallet.shared.cards[index.row].isFav = true
-            
-            let ed = Wallet.shared.cards[index.row]
-            CoreDataStack().edit(logo: ed.logo, title: ed.title, barcode: ed.barcode, at: index.row, fav: true)
-        } else if let cel = cell1 {
-            guard let index = collectionView.indexPath(for: cel) else {return}
-            cel.starButton.tintColor = .yellow
-            Wallet.shared.cards[index.row].isFav = true
-            
-            let ed = Wallet.shared.cards[index.row]
-            CoreDataStack().edit(logo: nil, title: ed.title, barcode: ed.barcode, at: index.row, fav: true)
-        }
-    }
-    
-    func removeFromFavs(cell: cardCollectionCellImage?, cell1: cardCollectionCellLabel?) {
-        if let cel = cell {
-            guard let index = collectionView.indexPath(for: cel) else {return}
-            cel.starButton.tintColor = .darkGray
-            Wallet.shared.cards[index.row].isFav = false
-            
-            let ed = Wallet.shared.cards[index.row]
-            CoreDataStack().edit(logo: ed.logo, title: ed.title, barcode: ed.barcode, at: index.row, fav: false)
-        } else if let cel = cell1 {
-            guard let index = collectionView.indexPath(for: cel) else {return}
-            cel.starButton.tintColor = .darkGray
-            Wallet.shared.cards[index.row].isFav = false
-            
-            let ed = Wallet.shared.cards[index.row]
-            CoreDataStack().edit(logo: nil, title: ed.title, barcode: ed.barcode, at: index.row, fav: false)
-        }
     }
     
     @IBAction private func editBtn(_ sender: Any) {
@@ -193,18 +174,14 @@ class ViewController: UIViewController {
     }
     
     @objc func onAddingCard() {
-        collectionView.insertItems(at: [[0, Wallet.shared.cards.count - 1]])
-        collectionView.scrollToItem(at: [0, Wallet.shared.cards.count - 1], at: .centeredHorizontally, animated: true)
         collectionView.scaledVisibleCells()
+        collectionView.reloadData()
+        ((self.tabBarController!.viewControllers![0] as? UINavigationController)?.viewControllers[0] as? ViewController)?.collectionView.scaledVisibleCells()
     }
     
     @objc func onRemovingCard(notif: Notification) {
-        if let userInfo = notif.userInfo as? [Int : Int] {
-            if let index = userInfo[0] {
-                collectionView.deleteItems(at: [[0, index]])
-                collectionView.scaledVisibleCells()
-            }
-        }
+        collectionView.reloadData()
+        ((self.tabBarController!.viewControllers![0] as? UINavigationController)?.viewControllers[0] as? ViewController)?.collectionView.scaledVisibleCells()
     }
     
     @objc func onEditingCard() {
