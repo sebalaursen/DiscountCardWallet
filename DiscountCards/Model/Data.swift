@@ -17,19 +17,14 @@ struct GooglePlacesResponse : Decodable {
 
 struct Place : Decodable {
     
-//    let formatted_address : String
     let geometry : Location
     let name : String
     
     
-//    enum CodingKeys : String, CodingKey {
-//        case geometry = "geometry"
-//        case name = "name"
-//        case openingHours = "opening_hours"
-//        case photos = "photos"
-//        case types = "types"
-//        case address = "vicinity"
-//    }
+    enum CodingKeys : String, CodingKey {
+        case geometry = "geometry"
+        case name = "name"
+    }
     
     struct Location : Decodable {
         
@@ -48,28 +43,6 @@ struct Place : Decodable {
                 case latitude = "lat"
                 case longitude = "lng"
             }
-        }
-    }
-    
-    struct OpenNow : Decodable {
-        
-        let isOpen : Bool
-        
-        enum CodingKeys : String, CodingKey {
-            case isOpen = "open_now"
-        }
-    }
-    
-    struct PhotoInfo : Decodable {
-        
-        let height : Int
-        let width : Int
-        let photoReference : String
-        
-        enum CodingKeys : String, CodingKey {
-            case height = "height"
-            case width = "width"
-            case photoReference = "photo_reference"
         }
     }
 }

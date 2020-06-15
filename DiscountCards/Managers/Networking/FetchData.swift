@@ -30,7 +30,6 @@ struct RequestURL {
 class FetchData {
     
     func fetch(loc: CLLocationCoordinate2D, name: String, radius: Float, completion: @escaping (_ resInfo: GooglePlacesResponse?) -> () ) {
-        //guard let url = URL(string: requestedURL.url.string!) else { return  }
         let str = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + "\(loc.latitude)"+",\(loc.longitude)"+"&radius="+"\(radius)"+"&keyword="+name+"&key=AIzaSyAd3le1hBYfOTj4X3bkrUfcS3pinlr2KSs"
         
         print(str)

@@ -14,7 +14,7 @@ protocol CoreLocDelegate: class {
     func alertLocationAccess()
 }
 
-class CoreLocationManadger:  NSObject, CLLocationManagerDelegate {
+class CoreLocationManager:  NSObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager!
     weak var delegate: CoreLocDelegate?
     

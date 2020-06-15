@@ -72,11 +72,23 @@ class Wallet {
     }
     
     func hasFavs() -> Bool {
-        for c in cards {
-            if c.isFav {
-                return true
+//        for c in cards {
+//            if c.isFav {
+//                return true
+//            }
+//        }
+        return cards.filter({ card -> Bool in
+            return card.isFav
+        }).isEmpty
+        //return false
+    }
+    
+    func findCard(title: String) -> Int {
+        for i in  0..<cards.count {
+            if cards[i].title == title {
+                return i
             }
         }
-        return false
+        return 0
     }
 }

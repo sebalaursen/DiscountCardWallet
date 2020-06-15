@@ -49,5 +49,8 @@ class SettingsViewController: UIViewController {
 }
 
 class Settings {
+    
+    
     static var radius: Float =  UserDefaults.standard.float(forKey: "Radius"+Wallet.shared.owner)
+    
 }

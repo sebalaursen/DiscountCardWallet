@@ -85,6 +85,7 @@ class FavoirtesViewController: UIViewController {
                     self.mapStarView.map.removeFromSuperview()
                     self.mapStarView.setup()
                     self.collectionView.isScrollEnabled = true
+                    self.collectionView.reloadData()
                 }
             }
         }

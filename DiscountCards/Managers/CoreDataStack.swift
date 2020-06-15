@@ -35,7 +35,7 @@ final class CoreDataStack {
         }
     }
     
-    func load(_ wallet: Wallet) {
+    func load() {
         let context = self.persistentContainer.viewContext
         let request1 = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
@@ -57,8 +57,8 @@ final class CoreDataStack {
                 for result in results1 as! [NSManagedObject] {
                     if let ca = result as? Card {
                         if ca.user! == us {
-                            print(ca.logo!)
-                            wallet.cards.append(card(backgroundColor: .white, logo: ca.logo! , barcode: ca.barcode!, title: ca.title!))
+                            print(ca.logo ?? "")
+                            Wallet.shared.cards.append(card(backgroundColor: .white, logo: ca.logo ?? "" , barcode: ca.barcode ?? "", title: ca.title ?? ""))
                         }
                     }
                 }
@@ -88,7 +88,6 @@ final class CoreDataStack {
         let newNote = NSEntityDescription.insertNewObject(forEntityName: "Card", into: context)
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         let predicate = NSPredicate(format: "username == %@", Wallet.shared.owner)
-        print("---" + Wallet.shared.owner)
         
         request.predicate = predicate
         request.returnsObjectsAsFaults = false

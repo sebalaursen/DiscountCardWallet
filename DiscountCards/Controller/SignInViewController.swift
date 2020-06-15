@@ -24,7 +24,7 @@ class SignInViewController: UIViewController {
                 if pass["Password"] as? String == passwordTF.text! {
                     Wallet.shared.owner = loginTF.text!
                     Wallet.shared.empty()
-                    CoreDataStack().load(Wallet.shared)
+                    CoreDataStack().load()
                     
                     performSegue(withIdentifier: "finishedSignInSegue", sender: nil)
                 } else {

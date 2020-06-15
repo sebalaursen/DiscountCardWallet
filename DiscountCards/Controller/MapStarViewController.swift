@@ -8,14 +8,13 @@
 
 import UIKit
 import MapKit
-import GooglePlaces
 
 class MapStarViewController: UIViewController {
     
     weak var parVC: UIViewController!
     //var UserTrackingBtn: MKUserTrackingButton!
     var currentLocation = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-    var locManager = CoreLocationManadger()
+    var locManager = CoreLocationManager()
     var name = ""
     
     
@@ -120,13 +119,19 @@ class MapStarViewController: UIViewController {
             }
             let cell = vc.getSelectedCell(cells: vc.collectionView.visibleCells)
             name = Wallet.shared.cards[vc.collectionView.indexPath(for: cell!)!.row].title
+        } else if let vc = parVC as? FavoirtesViewController {
+            UIView.animate(withDuration: 0.3) {
+                vc.view.frame.origin.y -= vc.view.frame.height * 0.4
+                self.view.frame = CGRect(x: 0, y: vc.view.bounds.maxY, width: vc.view.frame.width, height: vc.view.frame.height * 0.65 )
+            }
+            let cell = vc.getSelectedCell(cells: vc.collectionView.visibleCells)
+            name = Wallet.shared.cards[vc.collectionView.indexPath(for: cell!)!.row].title
         }
         favBtn.removeFromSuperview()
         mapBtn.removeFromSuperview()
         
         self.view.addSubview(map)
         map.showsUserLocation = true
-        //UserTrackingBtn = MKUserTrackingButton(mapView: map)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude), latitudinalMeters: 10000, longitudinalMeters: 10000)
         map.setRegion(region, animated: true)
         
@@ -145,6 +150,8 @@ class MapStarViewController: UIViewController {
                     annotation.title = r.name
                     self.map.addAnnotation(annotation)
                 }
+            } else {
+                self.alertPopUp(title: "Error", message: "No response from Google API.")
             }
         })
         
@@ -170,6 +177,7 @@ class MapStarViewController: UIViewController {
                 cell.layer.borderWidth = 1
                 cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
                 
+                ((self.tabBarController!.viewControllers![0] as? UINavigationController)?.viewControllers[0] as? ViewController)?.collectionView.scaledVisibleCells()
                 let ed = Wallet.shared.cards[index.row]
                 CoreDataStack().edit(logo: ed.logo, title: ed.title, barcode: ed.barcode, at: index.row, fav: true)
             }
@@ -186,6 +194,7 @@ class MapStarViewController: UIViewController {
                 vc.collectionView.scaledVisibleCells()
                 vc.hideMapStar()
                 
+                vc.collectionView.scaledVisibleCells()
                 ((self.tabBarController!.viewControllers![1] as? UINavigationController)?.viewControllers[0] as? FavoirtesViewController)?.collectionView.scaledVisibleCells()
             } else {
                 Wallet.shared.cards[index.row].isFav = true
@@ -194,6 +203,8 @@ class MapStarViewController: UIViewController {
                 cell.layer.borderColor = UIColor(red: 15/255, green: 186/255, blue: 3/255, alpha: 1).cgColor
                 
                 let ed = Wallet.shared.cards[index.row]
+                vc.collectionView.scaledVisibleCells()
+                ((self.tabBarController!.viewControllers![1] as? UINavigationController)?.viewControllers[0] as? FavoirtesViewController)?.collectionView.scaledVisibleCells()
                 CoreDataStack().edit(logo: ed.logo, title: ed.title, barcode: ed.barcode, at: index.row, fav: true)
             }
         }
@@ -201,7 +212,7 @@ class MapStarViewController: UIViewController {
     
     @objc func mapAction() {
         locManager.startTracking()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.setupMap()
         }
     }
